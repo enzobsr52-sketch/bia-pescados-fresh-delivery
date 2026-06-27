@@ -11,6 +11,8 @@ import { useEffect, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
 import { CartProvider } from "../lib/cart";
+import { PriceModeProvider } from "../lib/price-mode";
+import { PriceModeModal } from "../components/PriceModeModal";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 
 function NotFoundComponent() {
@@ -119,9 +121,12 @@ function RootComponent() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <CartProvider>
-        <Outlet />
-      </CartProvider>
+      <PriceModeProvider>
+        <CartProvider>
+          <PriceModeModal />
+          <Outlet />
+        </CartProvider>
+      </PriceModeProvider>
     </QueryClientProvider>
   );
 }
