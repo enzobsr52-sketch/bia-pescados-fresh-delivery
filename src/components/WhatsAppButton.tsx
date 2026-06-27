@@ -1,11 +1,13 @@
+import { company, waLink } from "@/lib/company";
+
 export function WhatsAppButton() {
-  const url = "https://wa.me/5511999990000?text=" + encodeURIComponent("Olá! Vim pelo site da Pescados da Bia e quero fazer um pedido.");
+  const url = waLink("Olá! Vim pelo site da Pescados da Bia e quero fazer um pedido.");
   return (
     <a
       href={url}
       target="_blank"
       rel="noreferrer"
-      aria-label="Atendimento WhatsApp"
+      aria-label={`Atendimento WhatsApp ${company.phone}`}
       className="fixed bottom-5 right-5 z-50 inline-flex items-center gap-2 rounded-full bg-whats px-4 py-3 text-white shadow-soft transition-transform hover:scale-110"
     >
       <svg viewBox="0 0 32 32" className="h-6 w-6 fill-white" aria-hidden>

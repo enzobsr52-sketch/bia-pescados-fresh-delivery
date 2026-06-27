@@ -4,7 +4,8 @@ import { ProductCard } from "@/components/ProductCard";
 import { getProduct, products, formatBRL } from "@/lib/products";
 import { useCart } from "@/lib/cart";
 import { useState } from "react";
-import { ShoppingCart, Minus, Plus, Snowflake, ShieldCheck, Truck, ChevronRight } from "lucide-react";
+import { ShoppingCart, Minus, Plus, Snowflake, ShieldCheck, Truck, ChevronRight, Lock } from "lucide-react";
+import { useEffectivePrice } from "@/components/PriceTag";
 
 export const Route = createFileRoute("/produto/$id")({
   loader: ({ params }) => {
@@ -43,6 +44,7 @@ function ProductPage() {
   const { product } = Route.useLoaderData();
   const { add } = useCart();
   const [qty, setQty] = useState(1);
+  const eff = useEffectivePrice(product);
 
   const related = products.filter((p) => p.category === product.category && p.id !== product.id).slice(0, 4);
 
@@ -66,33 +68,54 @@ function ProductPage() {
           <h1 className="mt-2 font-display text-3xl text-navy sm:text-4xl">{product.name}</h1>
           <div className="mt-3 text-sm text-muted-foreground">Peso líquido: {product.weight}</div>
 
-          <div className="mt-6 flex items-end gap-3">
-            {product.oldPrice && (
-              <span className="text-lg text-muted-foreground line-through">{formatBRL(product.oldPrice)}</span>
-            )}
-            <span className="font-display text-4xl text-navy">{formatBRL(product.price)}</span>
-          </div>
-          <p className="mt-1 text-xs text-muted-foreground">ou 3x de {formatBRL(product.price / 3)} sem juros</p>
+          {eff.locked ? (
+            <div className="mt-6 rounded-2xl border border-dashed border-pink/40 bg-pink/5 p-5">
+              <div className="flex items-center gap-2 font-display text-navy">
+                <Lock className="h-5 w-5 text-pink" /> Preço de atacado restrito
+              </div>
+              <p className="mt-2 text-sm text-foreground/80">
+                Solicite acesso aos preços de revenda para visualizar valores especiais para supermercados, peixarias e restaurantes.
+              </p>
+              <Link to="/atacado" className="mt-4 inline-flex rounded-full bg-pink px-5 py-2.5 text-sm font-semibold text-pink-foreground">
+                Solicitar acesso
+              </Link>
+            </div>
+          ) : (
+            <>
+              <div className="mt-6 flex items-end gap-3">
+                {eff.oldPrice && (
+                  <span className="text-lg text-muted-foreground line-through">{formatBRL(eff.oldPrice)}</span>
+                )}
+                <span className="font-display text-4xl text-navy">{formatBRL(eff.price)}</span>
+                {eff.mode === "atacado" && (
+                  <span className="rounded-full bg-pink/10 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider text-pink">Atacado</span>
+                )}
+              </div>
+              <p className="mt-1 text-xs text-muted-foreground">ou 3x de {formatBRL(eff.price / 3)} sem juros</p>
+            </>
+          )}
 
           <p className="mt-6 text-sm leading-relaxed text-foreground/80">{product.description}</p>
 
-          <div className="mt-8 flex items-center gap-4">
-            <div className="inline-flex items-center rounded-full border border-border">
-              <button onClick={() => setQty((q) => Math.max(1, q - 1))} className="p-3 text-navy hover:text-pink" aria-label="Diminuir">
-                <Minus className="h-4 w-4" />
-              </button>
-              <span className="w-8 text-center font-semibold text-navy">{qty}</span>
-              <button onClick={() => setQty((q) => q + 1)} className="p-3 text-navy hover:text-pink" aria-label="Aumentar">
-                <Plus className="h-4 w-4" />
+          {!eff.locked && (
+            <div className="mt-8 flex items-center gap-4">
+              <div className="inline-flex items-center rounded-full border border-border">
+                <button onClick={() => setQty((q) => Math.max(1, q - 1))} className="p-3 text-navy hover:text-pink" aria-label="Diminuir">
+                  <Minus className="h-4 w-4" />
+                </button>
+                <span className="w-8 text-center font-semibold text-navy">{qty}</span>
+                <button onClick={() => setQty((q) => q + 1)} className="p-3 text-navy hover:text-pink" aria-label="Aumentar">
+                  <Plus className="h-4 w-4" />
+                </button>
+              </div>
+              <button
+                onClick={() => add(product.id, qty)}
+                className="inline-flex flex-1 items-center justify-center gap-2 rounded-full bg-pink px-6 py-3.5 font-semibold text-pink-foreground shadow-pink transition-transform hover:scale-[1.02]"
+              >
+                <ShoppingCart className="h-5 w-5" /> Adicionar ao carrinho
               </button>
             </div>
-            <button
-              onClick={() => add(product.id, qty)}
-              className="inline-flex flex-1 items-center justify-center gap-2 rounded-full bg-pink px-6 py-3.5 font-semibold text-pink-foreground shadow-pink transition-transform hover:scale-[1.02]"
-            >
-              <ShoppingCart className="h-5 w-5" /> Adicionar ao carrinho
-            </button>
-          </div>
+          )}
 
           <div className="mt-8 grid grid-cols-3 gap-3 text-xs">
             {[
