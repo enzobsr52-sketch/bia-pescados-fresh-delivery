@@ -32,7 +32,7 @@ function Catalogo() {
   const filtered = useMemo(() => {
     return products.filter((p) => {
       if (category !== "Todos" && p.category !== category) return false;
-      if (p.price > maxPrice) return false;
+      if (p.priceRetail > maxPrice) return false;
       if (onlyAvailable && !p.inStock) return false;
       if (query && !p.name.toLowerCase().includes(query.toLowerCase())) return false;
       return true;

@@ -1,6 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import { Instagram, Facebook, MapPin, Phone, Clock } from "lucide-react";
 import { Logo } from "./Logo";
+import { company } from "@/lib/company";
 
 export function Footer() {
   return (
@@ -24,6 +25,7 @@ export function Footer() {
           <ul className="space-y-2 text-sm text-white/80">
             <li><Link to="/" className="hover:text-pink">Início</Link></li>
             <li><Link to="/catalogo" className="hover:text-pink">Catálogo</Link></li>
+            <li><Link to="/atacado" className="hover:text-pink">Atacado / Revenda</Link></li>
             <li><Link to="/sobre" className="hover:text-pink">Sobre nós</Link></li>
             <li><Link to="/entregas" className="hover:text-pink">Entregas</Link></li>
           </ul>
@@ -32,9 +34,9 @@ export function Footer() {
         <div>
           <h4 className="mb-3 text-sm font-display tracking-wider text-pink">CONTATO</h4>
           <ul className="space-y-3 text-sm text-white/80">
-            <li className="flex items-start gap-2"><Phone className="mt-0.5 h-4 w-4 text-pink" />(11) 99999-0000</li>
-            <li className="flex items-start gap-2"><MapPin className="mt-0.5 h-4 w-4 text-pink" />Rua das Águas, 123 — Centro</li>
-            <li className="flex items-start gap-2"><Clock className="mt-0.5 h-4 w-4 text-pink" />Seg a Sáb: 8h às 19h</li>
+            <li className="flex items-start gap-2"><Phone className="mt-0.5 h-4 w-4 text-pink" />{company.phone}</li>
+            <li className="flex items-start gap-2"><MapPin className="mt-0.5 h-4 w-4 text-pink" />{company.address.street}, {company.address.district}, {company.address.city}-{company.address.state} • CEP {company.address.zip}</li>
+            <li className="flex items-start gap-2"><Clock className="mt-0.5 h-4 w-4 text-pink" />{company.hours}</li>
           </ul>
         </div>
 
@@ -44,7 +46,11 @@ export function Footer() {
             <a href="#" aria-label="Instagram" className="rounded-full bg-white/10 p-2 hover:bg-pink"><Instagram className="h-4 w-4" /></a>
             <a href="#" aria-label="Facebook" className="rounded-full bg-white/10 p-2 hover:bg-pink"><Facebook className="h-4 w-4" /></a>
           </div>
-          <p className="mt-6 text-xs text-white/50">CNPJ 00.000.000/0001-00</p>
+          <p className="mt-6 text-xs leading-relaxed text-white/50">
+            {company.legalName}<br />
+            CNPJ: {company.cnpj}<br />
+            Indústria Brasileira
+          </p>
         </div>
       </div>
       <div className="border-t border-white/10 py-4 text-center text-xs text-white/50">

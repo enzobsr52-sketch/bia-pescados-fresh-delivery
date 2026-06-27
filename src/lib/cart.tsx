@@ -1,5 +1,6 @@
 import { createContext, useContext, useEffect, useMemo, useState, type ReactNode } from "react";
 import { products, type Product } from "./products";
+import { usePriceMode } from "./price-mode";
 
 interface CartItem { id: string; qty: number; }
 interface CartCtx {
@@ -10,7 +11,7 @@ interface CartCtx {
   clear: () => void;
   count: number;
   subtotal: number;
-  detailed: Array<{ product: Product; qty: number; lineTotal: number }>;
+  detailed: Array<{ product: Product; qty: number; unitPrice: number; lineTotal: number }>;
 }
 
 const Ctx = createContext<CartCtx | null>(null);
@@ -18,6 +19,9 @@ const KEY = "pdb-cart-v1";
 
 export function CartProvider({ children }: { children: ReactNode }) {
   const [items, setItems] = useState<CartItem[]>([]);
+  const { mode, wholesaleApproved } = usePriceMode();
+  const priceOf = (p: Product) =>
+    mode === "atacado" && wholesaleApproved ? p.priceWholesale : p.priceRetail;
 
   useEffect(() => {
     try {
@@ -34,7 +38,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
       .map((i) => {
         const p = products.find((p) => p.id === i.id);
         if (!p) return null;
-        return { product: p, qty: i.qty, lineTotal: p.price * i.qty };
+        return { product: p, qty: i.qty, unitPrice: priceOf(p), lineTotal: priceOf(p) * i.qty };
       })
       .filter(Boolean) as CartCtx["detailed"];
     return {
@@ -55,7 +59,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
       subtotal: detailed.reduce((a, b) => a + b.lineTotal, 0),
       detailed,
     };
-  }, [items]);
+  }, [items, mode, wholesaleApproved]);
 
   return <Ctx.Provider value={api}>{children}</Ctx.Provider>;
 }

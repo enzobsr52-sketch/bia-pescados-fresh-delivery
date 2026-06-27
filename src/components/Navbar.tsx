@@ -3,10 +3,12 @@ import { ShoppingCart, Menu, X } from "lucide-react";
 import { useState } from "react";
 import { Logo } from "./Logo";
 import { useCart } from "@/lib/cart";
+import { PriceModeBadge } from "./PriceModeBadge";
 
 const links = [
   { to: "/", label: "Início" },
   { to: "/catalogo", label: "Catálogo" },
+  { to: "/atacado", label: "Atacado" },
   { to: "/sobre", label: "Sobre" },
   { to: "/entregas", label: "Entregas" },
 ];
@@ -40,6 +42,7 @@ export function Navbar() {
         </nav>
 
         <div className="flex items-center gap-2">
+          <PriceModeBadge />
           <Link
             to="/carrinho"
             className="relative inline-flex items-center gap-2 rounded-full bg-navy px-4 py-2 text-sm font-semibold text-navy-foreground transition-transform hover:scale-105"
