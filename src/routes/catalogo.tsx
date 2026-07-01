@@ -8,7 +8,7 @@ import { z } from "zod";
 import { fallback, zodValidator } from "@tanstack/zod-adapter";
 
 const schema = z.object({
-  cat: fallback(z.string().optional(), undefined),
+  cat: fallback(z.string(), "").optional(),
 });
 
 export const Route = createFileRoute("/catalogo")({
