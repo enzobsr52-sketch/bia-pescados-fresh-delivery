@@ -54,7 +54,14 @@ export function PriceTag({ product, size = "md" }: { product: Product; size?: "s
       )}
       <div className={`font-display text-navy ${sizes.price}`}>{formatBRL(eff.price)}</div>
       {eff.mode === "atacado" && (
-        <div className="text-[10px] font-semibold uppercase tracking-wider text-pink">Preço atacado</div>
+        <>
+          <div className="text-[10px] font-semibold uppercase tracking-wider text-pink">Preço atacado / un.</div>
+          {eff.boxQty && eff.boxPrice && (
+            <div className="mt-0.5 text-[11px] text-muted-foreground">
+              Caixa c/ {eff.boxQty} un. · {formatBRL(eff.boxPrice)}
+            </div>
+          )}
+        </>
       )}
     </div>
   );
