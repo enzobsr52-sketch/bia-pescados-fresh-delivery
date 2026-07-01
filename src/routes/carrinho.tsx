@@ -11,8 +11,7 @@ export const Route = createFileRoute("/carrinho")({
 
 function Carrinho() {
   const { detailed, setQty, remove, subtotal, count } = useCart();
-  const shipping = subtotal === 0 ? 0 : subtotal >= 150 ? 0 : 15;
-  const total = subtotal + shipping;
+  const total = subtotal;
 
   return (
     <PageShell>
@@ -63,19 +62,13 @@ function Carrinho() {
               <h2 className="font-display text-lg text-navy">Resumo</h2>
               <dl className="mt-4 space-y-2 text-sm">
                 <div className="flex justify-between"><dt className="text-muted-foreground">Subtotal</dt><dd>{formatBRL(subtotal)}</dd></div>
-                <div className="flex justify-between">
-                  <dt className="text-muted-foreground">Entrega</dt>
-                  <dd>{shipping === 0 ? <span className="text-whats font-semibold">Grátis</span> : formatBRL(shipping)}</dd>
-                </div>
                 <div className="border-t border-border pt-3 flex justify-between font-display text-lg text-navy">
                   <dt>Total</dt><dd>{formatBRL(total)}</dd>
                 </div>
               </dl>
-              {subtotal < 150 && (
-                <p className="mt-3 rounded-lg bg-cream p-3 text-xs text-navy">
-                  Faltam <strong>{formatBRL(150 - subtotal)}</strong> para frete grátis!
-                </p>
-              )}
+              <p className="mt-3 rounded-lg bg-cream p-3 text-xs text-navy">
+                O valor da entrega é combinado após o pedido, conforme sua região.
+              </p>
               <Link
                 to="/checkout"
                 className="mt-5 block rounded-full bg-pink py-3 text-center font-semibold text-pink-foreground shadow-pink"

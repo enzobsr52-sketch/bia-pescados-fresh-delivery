@@ -40,8 +40,7 @@ function Checkout() {
   const { mode, wholesaleApproved } = usePriceMode();
   const navigate = useNavigate();
 
-  const shipping = subtotal === 0 ? 0 : subtotal >= 150 ? 0 : 15;
-  const total = subtotal + shipping;
+  const total = subtotal;
   // Pix tem 5% de desconto no varejo; atacado mantém valor de tabela
   const discount = mode === "varejo" ? total * 0.05 : 0;
   const finalTotal = +(total - discount).toFixed(2);
@@ -249,7 +248,7 @@ function Checkout() {
             </ul>
             <dl className="mt-4 space-y-1 border-t border-border pt-3 text-sm">
               <div className="flex justify-between"><dt className="text-muted-foreground">Subtotal</dt><dd>{formatBRL(subtotal)}</dd></div>
-              <div className="flex justify-between"><dt className="text-muted-foreground">Entrega</dt><dd>{shipping === 0 ? "Grátis" : formatBRL(shipping)}</dd></div>
+              <div className="flex justify-between"><dt className="text-muted-foreground">Entrega</dt><dd>a combinar</dd></div>
               {discount > 0 && (
                 <div className="flex justify-between text-whats"><dt>Desconto Pix (5%)</dt><dd>-{formatBRL(discount)}</dd></div>
               )}
@@ -312,7 +311,7 @@ function Checkout() {
           </ul>
           <dl className="mt-4 space-y-1 border-t border-border pt-3 text-sm">
             <div className="flex justify-between"><dt className="text-muted-foreground">Subtotal</dt><dd>{formatBRL(subtotal)}</dd></div>
-            <div className="flex justify-between"><dt className="text-muted-foreground">Entrega</dt><dd>{shipping === 0 ? "Grátis" : formatBRL(shipping)}</dd></div>
+            <div className="flex justify-between"><dt className="text-muted-foreground">Entrega</dt><dd>a combinar</dd></div>
             {discount > 0 && (
               <div className="flex justify-between text-whats"><dt>Desconto Pix (5%)</dt><dd>-{formatBRL(discount)}</dd></div>
             )}

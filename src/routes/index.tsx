@@ -115,9 +115,9 @@ function Home() {
       <section className="mx-auto max-w-7xl px-4 pb-14">
         <div className="overflow-hidden rounded-3xl bg-gradient-to-r from-pink to-pink/70 p-8 text-pink-foreground md:p-12">
           <div className="max-w-xl">
-            <div className="text-xs font-semibold uppercase tracking-widest">Frete grátis</div>
-            <h3 className="mt-2 font-display text-3xl md:text-4xl">Acima de R$ 150, a entrega é por nossa conta.</h3>
-            <p className="mt-3 text-white/90">Para a região metropolitana. Confira as áreas atendidas.</p>
+            <div className="text-xs font-semibold uppercase tracking-widest">Frota própria</div>
+            <h3 className="mt-2 font-display text-3xl md:text-4xl">Entrega refrigerada em toda a região.</h3>
+            <p className="mt-3 text-white/90">Do Noroeste de Minas ao Triângulo, DF e Goiás. Confira as áreas atendidas.</p>
             <Link to="/entregas" className="mt-5 inline-flex items-center gap-2 rounded-full bg-navy px-5 py-2.5 text-sm font-semibold text-navy-foreground">
               Ver regiões <ArrowRight className="h-4 w-4" />
             </Link>
