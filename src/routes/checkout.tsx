@@ -40,8 +40,7 @@ function Checkout() {
   const { mode, wholesaleApproved } = usePriceMode();
   const navigate = useNavigate();
 
-  const shipping = subtotal === 0 ? 0 : subtotal >= 150 ? 0 : 15;
-  const total = subtotal + shipping;
+  const total = subtotal;
   // Pix tem 5% de desconto no varejo; atacado mantém valor de tabela
   const discount = mode === "varejo" ? total * 0.05 : 0;
   const finalTotal = +(total - discount).toFixed(2);

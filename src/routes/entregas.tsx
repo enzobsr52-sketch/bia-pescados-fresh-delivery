@@ -28,8 +28,8 @@ function Entregas() {
         <div className="mx-auto max-w-7xl px-4 py-12">
           <h1 className="font-display text-3xl text-navy sm:text-4xl">Entregas</h1>
           <p className="mt-2 max-w-xl text-muted-foreground">
-            Entregamos em veículos refrigerados para garantir o frescor do começo ao fim.
-            Frete grátis em compras acima de R$ 150.
+            Entregamos em veículos refrigerados próprios para garantir o frescor do começo ao fim.
+            O valor do frete é combinado após o pedido, conforme a região de entrega.
           </p>
         </div>
       </section>

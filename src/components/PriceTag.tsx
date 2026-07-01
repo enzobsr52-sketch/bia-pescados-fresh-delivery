@@ -15,13 +15,17 @@ export function useEffectivePrice(product: Product) {
       locked: !wholesaleApproved,
       price: product.priceWholesale,
       oldPrice: undefined as number | undefined,
+      boxQty: product.boxQty,
+      boxPrice: product.boxPrice,
     };
   }
   return {
     mode: "varejo" as const,
     locked: false,
     price: product.priceRetail,
-    oldPrice: product.oldPrice,
+    oldPrice: undefined as number | undefined,
+    boxQty: undefined,
+    boxPrice: undefined,
   };
 }
 
