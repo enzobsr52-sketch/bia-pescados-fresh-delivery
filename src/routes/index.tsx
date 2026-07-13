@@ -10,8 +10,8 @@ export const Route = createFileRoute("/")({
     meta: [
       { title: "Pescados da Bia — Peixes frescos e congelados com entrega" },
       { name: "description", content: "Compre pescados frescos, filés, frutos do mar e congelados direto da Pescados da Bia. Entrega rápida e qualidade garantida." },
-      { property: "og:title", content: "Pescados da Bia" },
-      { property: "og:description", content: "Sabor que conquista. Qualidade que permanece." },
+      { property: "og:title", content: "Pescados da Bia — Peixes frescos e congelados com entrega" },
+      { property: "og:description", content: "Compre pescados frescos, filés, frutos do mar e congelados direto da Pescados da Bia. Entrega rápida e qualidade garantida." },
     ],
   }),
   component: Home,
