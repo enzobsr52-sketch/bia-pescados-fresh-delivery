@@ -1,13 +1,18 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { PageShell } from "@/components/PageShell";
-import { Heart, Award, Users } from "lucide-react";
+import { Heart, ShieldCheck, Star } from "lucide-react";
 
 export const Route = createFileRoute("/sobre")({
   head: () => ({
     meta: [
-      { title: "Sobre nós — Pescados da Bia" },
-      { name: "description", content: "Conheça a história da Pescados da Bia e nosso compromisso com qualidade, frescor e atendimento humano." },
+      { title: "Nossa história — Pescados da Bia" },
+      { name: "description", content: "Da paixão pela pesca a uma unidade moderna de beneficiamento: conheça a história da Pescados da Bia e nosso compromisso com qualidade." },
+      { property: "og:title", content: "Nossa história — Pescados da Bia" },
+      { property: "og:description", content: "Da paixão pela pesca a uma unidade moderna de beneficiamento: conheça a história da Pescados da Bia e nosso compromisso com qualidade." },
+      { property: "og:type", content: "article" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
+    links: [{ rel: "canonical", href: "https://bia-pescados-fresh-delivery.lovable.app/sobre" }],
   }),
   component: Sobre,
 });
@@ -24,25 +29,49 @@ function Sobre() {
 
       <section className="mx-auto max-w-3xl px-4 py-14 text-foreground/85">
         <p className="text-lg leading-relaxed">
-          A <strong className="text-navy">Pescados da Bia</strong> nasceu da paixão de uma família por trazer
-          o melhor da pesca direto para a mesa dos brasileiros. O que começou pequeno, com a Bia
-          atendendo pessoalmente cada cliente, hoje é uma referência regional em qualidade,
-          frescor e atendimento humano.
+          A <strong className="text-navy">Pescados da Bia</strong> nasceu da paixão pela pesca e da vontade
+          de oferecer à nossa região produtos que antes eram difíceis de encontrar com qualidade,
+          variedade e segurança.
         </p>
         <p className="mt-4 leading-relaxed">
-          Trabalhamos com produtores locais e seguimos rigorosos padrões de cadeia de frio para
-          garantir que cada peixe, filé ou fruto do mar chegue até você com a mesma qualidade
-          de quando saiu da água. "Sabor que conquista, qualidade que permanece" — esse é o nosso
-          compromisso diário.
+          Percebemos que muitos consumidores precisavam buscar pescados diferenciados em outras
+          cidades ou se contentavam com opções limitadas. Foi dessa necessidade que surgiu o
+          propósito de construir uma empresa comprometida com excelência em cada etapa do processo.
+        </p>
+        <p className="mt-4 leading-relaxed">
+          Hoje, contamos com uma moderna unidade de beneficiamento que segue rigorosos padrões de
+          qualidade, preservando a cadeia de frio desde a seleção da matéria-prima até a entrega ao
+          cliente. Nosso portfólio reúne uma linha completa de pescados selecionados, frutos do mar
+          e produtos empanados, desenvolvidos para oferecer praticidade, sabor e segurança
+          alimentar, atendendo tanto consumidores finais quanto estabelecimentos comerciais.
+        </p>
+        <p className="mt-4 leading-relaxed">
+          Mais do que vender pescados, queremos desenvolver a cultura do consumo de produtos de
+          excelência e nos tornar referência regional em qualidade, inovação e confiança. Esse
+          compromisso está presente em cada produto que leva a marca Pescados da Bia, porque
+          acreditamos que oferecer qualidade é a melhor forma de conquistar e fidelizar nossos
+          clientes.
         </p>
       </section>
 
       <section className="mx-auto max-w-7xl px-4 pb-20">
         <div className="grid gap-4 md:grid-cols-3">
           {[
-            { icon: Heart, title: "Atendimento humano", text: "Cada cliente é tratado com carinho e atenção, como na primeira venda." },
-            { icon: Award, title: "Qualidade certificada", text: "Produtos selecionados e cadeia de frio rigorosa, do produtor à sua casa." },
-            { icon: Users, title: "Tradição familiar", text: "Mais de uma década atendendo famílias com pescados de confiança." },
+            {
+              icon: Heart,
+              title: "Paixão pela pesca",
+              text: "A paixão pela pesca foi o ponto de partida para transformar uma necessidade da região em uma empresa comprometida com qualidade e excelência.",
+            },
+            {
+              icon: ShieldCheck,
+              title: "Qualidade sem concessões",
+              text: "Selecionamos matérias-primas de procedência confiável e seguimos rigorosamente a cadeia de frio para preservar sabor e segurança.",
+            },
+            {
+              icon: Star,
+              title: "Referência regional",
+              text: "Nosso objetivo é oferecer à região produtos diferenciados, elevando o padrão de qualidade dos pescados e congelados disponíveis no mercado.",
+            },
           ].map((v) => (
             <div key={v.title} className="rounded-2xl border border-border bg-card p-6">
               <v.icon className="h-8 w-8 text-pink" />
