@@ -3,7 +3,7 @@ import { PageShell } from "@/components/PageShell";
 import { ProductCard } from "@/components/ProductCard";
 import { products, categories } from "@/lib/products";
 import { ArrowRight, Truck, Snowflake, ShieldCheck, Star } from "lucide-react";
-import heroFish from "@/assets/hero-fish.jpg";
+import heroFish from "@/assets/hero-salmao-camarao.jpg";
 
 export const Route = createFileRoute("/")({
   head: () => ({
