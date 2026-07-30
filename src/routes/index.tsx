@@ -29,10 +29,11 @@ function Home() {
     <PageShell>
       {/* HERO */}
       <section className="relative overflow-hidden bg-navy text-navy-foreground">
-        <div className="absolute inset-0 opacity-40">
-          <img src={heroFish} alt="" className="h-full w-full object-cover" width={1600} height={900} />
+        <div className="absolute inset-0">
+          <img src={heroFish} alt="Filé de salmão fresco no gelo ao lado de camarões empanados crocantes" className="h-full w-full object-cover" width={1920} height={1088} />
         </div>
-        <div className="absolute inset-0 bg-gradient-to-r from-navy via-navy/90 to-navy/40" />
+        <div className="absolute inset-0 bg-gradient-to-r from-navy via-navy/85 to-navy/20" />
+        <div className="absolute inset-0 bg-navy/25 md:hidden" />
         <div className="relative mx-auto grid max-w-7xl gap-8 px-4 py-20 md:py-28 lg:grid-cols-2">
           <div>
             <span className="inline-flex items-center gap-2 rounded-full bg-pink/20 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-pink">
