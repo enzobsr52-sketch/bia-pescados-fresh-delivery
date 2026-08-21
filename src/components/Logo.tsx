@@ -1,4 +1,4 @@
-import logo from "@/assets/IMG-20260615-WA0023.jpg.asset.json";
+import logo from "@/assets/img/IMG-20260615-WA0023.webp";
 
 export function Logo({ className = "h-10 w-10" }: { className?: string }) {
   return (
