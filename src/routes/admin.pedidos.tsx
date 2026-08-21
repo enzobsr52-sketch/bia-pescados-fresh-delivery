@@ -16,7 +16,13 @@ interface StoredOrder {
 }
 
 export const Route = createFileRoute("/admin/pedidos")({
-  head: () => ({ meta: [{ title: "Pedidos — Painel" }] }),
+  head: () => ({
+    meta: [
+      { title: "Painel de pedidos | Pescados da Bia" },
+      { name: "description", content: "Área interna para acompanhar e confirmar os pedidos recebidos na loja." },
+      { name: "robots", content: "noindex, nofollow" },
+    ],
+  }),
   component: AdminOrders,
 });
 

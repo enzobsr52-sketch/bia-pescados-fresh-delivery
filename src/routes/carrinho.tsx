@@ -5,7 +5,19 @@ import { formatBRL } from "@/lib/products";
 import { Minus, Plus, Trash2, ShoppingBag } from "lucide-react";
 
 export const Route = createFileRoute("/carrinho")({
-  head: () => ({ meta: [{ title: "Carrinho — Pescados da Bia" }] }),
+  head: () => ({
+    meta: [
+      { title: "Seu carrinho | Pescados da Bia" },
+      { name: "description", content: "Revise os pescados e congelados escolhidos e finalize seu pedido com pagamento via Pix." },
+      { property: "og:title", content: "Seu carrinho | Pescados da Bia" },
+      { property: "og:description", content: "Revise seus itens e finalize o pedido com pagamento via Pix." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary" },
+      { name: "twitter:title", content: "Seu carrinho | Pescados da Bia" },
+      { name: "twitter:description", content: "Revise seus itens e finalize o pedido." },
+      { name: "robots", content: "noindex" },
+    ],
+  }),
   component: Carrinho,
 });
 

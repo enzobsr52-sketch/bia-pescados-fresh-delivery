@@ -1,17 +1,17 @@
-import postaSurubim from "@/assets/IMG-20260615-WA0022.jpg.asset.json";
-import costelaTambaqui from "@/assets/IMG-20260615-WA0021.jpg.asset.json";
-import postaTambaqui from "@/assets/IMG-20260615-WA0020.jpg.asset.json";
-import saithe from "@/assets/IMG-20260615-WA0019.jpg.asset.json";
-import salmao from "@/assets/IMG-20260623-WA0001.jpg.asset.json";
-import camaraoGG from "@/assets/IMG-20260623-WA0005.jpg.asset.json";
-import bolinhoTilapia from "@/assets/IMG-20260620-WA0014.jpg.asset.json";
-import bolinhoCamarao from "@/assets/IMG-20260620-WA0015.jpg.asset.json";
-import bolinhoBacalhau from "@/assets/IMG-20260620-WA0013.jpg.asset.json";
-import iscaTilapia from "@/assets/IMG-20260620-WA0012.jpg.asset.json";
-import camaraoRequeijao from "@/assets/IMG-20260620-WA0011.jpg.asset.json";
-import hotFiladelfia from "@/assets/IMG-20260620-WA0010.jpg.asset.json";
-import camaraoEmpanado340 from "@/assets/camarao-empanado-340.jpg.asset.json";
-import camaraoCreamCheese from "@/assets/camarao-cream-cheese.jpg.asset.json";
+import postaSurubim from "@/assets/img/IMG-20260615-WA0022.webp";
+import costelaTambaqui from "@/assets/img/IMG-20260615-WA0021.webp";
+import postaTambaqui from "@/assets/img/IMG-20260615-WA0020.webp";
+import saithe from "@/assets/img/IMG-20260615-WA0019.webp";
+import salmao from "@/assets/img/IMG-20260623-WA0001.webp";
+import camaraoGG from "@/assets/img/IMG-20260623-WA0005.webp";
+import bolinhoTilapia from "@/assets/img/IMG-20260620-WA0014.webp";
+import bolinhoCamarao from "@/assets/img/IMG-20260620-WA0015.webp";
+import bolinhoBacalhau from "@/assets/img/IMG-20260620-WA0013.webp";
+import iscaTilapia from "@/assets/img/IMG-20260620-WA0012.webp";
+import camaraoRequeijao from "@/assets/img/IMG-20260620-WA0011.webp";
+import hotFiladelfia from "@/assets/img/IMG-20260620-WA0010.webp";
+import camaraoEmpanado340 from "@/assets/img/camarao-empanado-340.webp";
+import camaraoCreamCheese from "@/assets/img/camarao-cream-cheese.webp";
 
 export type Category =
   | "Linha Pescados"
@@ -48,7 +48,7 @@ export const products: Product[] = [
     boxQty: 15,
     boxPrice: 403.5,
     weight: "375g",
-    image: bolinhoBacalhau.url,
+    image: bolinhoBacalhau,
     description: "Tradicional bolinho de bacalhau, com massa leve e recheio saboroso. Direto do congelador para a frigideira.",
     inStock: true,
     featured: true,
@@ -62,7 +62,7 @@ export const products: Product[] = [
     boxQty: 20,
     boxPrice: 538.0,
     weight: "375g",
-    image: bolinhoCamarao.url,
+    image: bolinhoCamarao,
     description: "Bolinhos de camarão empanados e prontos para fritar. Crocante por fora, macio por dentro.",
     inStock: true,
     featured: true,
@@ -76,7 +76,7 @@ export const products: Product[] = [
     boxQty: 20,
     boxPrice: 458.0,
     weight: "375g",
-    image: bolinhoTilapia.url,
+    image: bolinhoTilapia,
     description: "Bolinhos crocantes de tilápia, temperados e empanados, prontos para fritar.",
     inStock: true,
   },
@@ -89,7 +89,7 @@ export const products: Product[] = [
     boxQty: 15,
     boxPrice: 448.5,
     weight: "380g",
-    image: iscaTilapia.url,
+    image: iscaTilapia,
     description: "Filé de tilápia em tiras, temperado e empanado. Praticidade total: basta fritar e servir.",
     inStock: true,
   },
@@ -102,7 +102,7 @@ export const products: Product[] = [
     boxQty: 12,
     boxPrice: 346.8,
     weight: "340g",
-    image: camaraoEmpanado340.url,
+    image: camaraoEmpanado340,
     description: "Camarão empanado tradicional, crocante e no ponto certo do tempero. Pronto para fritar.",
     inStock: true,
   },
@@ -115,7 +115,7 @@ export const products: Product[] = [
     boxQty: 12,
     boxPrice: 406.8,
     weight: "400g",
-    image: camaraoCreamCheese.url,
+    image: camaraoCreamCheese,
     description: "Camarões empanados recheados com cream cheese. Receita cremosa, ideal para festas e petiscos.",
     inStock: true,
     featured: true,
@@ -129,7 +129,7 @@ export const products: Product[] = [
     boxQty: 12,
     boxPrice: 406.8,
     weight: "400g",
-    image: camaraoRequeijao.url,
+    image: camaraoRequeijao,
     description: "Camarões empanados recheados com requeijão cremoso. Sucesso garantido nas festas.",
     inStock: true,
   },
@@ -142,7 +142,7 @@ export const products: Product[] = [
     boxQty: 12,
     boxPrice: 466.8,
     weight: "500g",
-    image: hotFiladelfia.url,
+    image: hotFiladelfia,
     description: "Sushi empanado recheado com salmão e cream cheese, pronto para fritar. Crocante por fora, cremoso por dentro.",
     inStock: true,
     featured: true,
@@ -158,7 +158,7 @@ export const products: Product[] = [
     boxQty: 25,
     boxPrice: 497.5,
     weight: "450g",
-    image: costelaTambaqui.url,
+    image: costelaTambaqui,
     description: "A famosa costela de tambaqui, suculenta e marcante. Perfeita para o churrasco.",
     inStock: true,
     featured: true,
@@ -172,7 +172,7 @@ export const products: Product[] = [
     boxQty: 25,
     boxPrice: 447.5,
     weight: "450g",
-    image: postaTambaqui.url,
+    image: postaTambaqui,
     description: "Postas generosas de tambaqui congeladas no ponto certo. Ideal para fritar, grelhar ou assar.",
     inStock: true,
   },
@@ -185,7 +185,7 @@ export const products: Product[] = [
     boxQty: 25,
     boxPrice: 722.5,
     weight: "450g",
-    image: postaSurubim.url,
+    image: postaSurubim,
     description: "Postas selecionadas de surubim, peixe nobre de água doce. Carne branca e firme.",
     inStock: true,
   },
@@ -198,7 +198,7 @@ export const products: Product[] = [
     boxQty: 25,
     boxPrice: 997.5,
     weight: "400g",
-    image: saithe.url,
+    image: saithe,
     description: "Filé de saithe dessalgado tipo bacalhau, congelado. Pronto para bolinhos, bacalhoadas e receitas tradicionais.",
     inStock: true,
   },
@@ -211,7 +211,7 @@ export const products: Product[] = [
     boxQty: 25,
     boxPrice: 1212.5,
     weight: "porção",
-    image: salmao.url,
+    image: salmao,
     description: "Filé de salmão congelado com pele, rico em ômega 3. Ideal para grelhar, assar ou preparar em receitas asiáticas.",
     inStock: true,
     featured: true,
@@ -225,7 +225,7 @@ export const products: Product[] = [
     boxQty: 25,
     boxPrice: 947.5,
     weight: "200g",
-    image: camaraoGG.url,
+    image: camaraoGG,
     description: "Camarão cinza graúdo (GG), limpo e eviscerado. Perfeito para risotos, massas e empanados.",
     inStock: true,
     featured: true,

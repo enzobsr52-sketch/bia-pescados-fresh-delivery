@@ -6,7 +6,18 @@ import { company, waLink } from "@/lib/company";
 import { usePriceMode } from "@/lib/price-mode";
 
 export const Route = createFileRoute("/atacado")({
-  head: () => ({ meta: [{ title: "Atacado / Revenda — Pescados da Bia" }] }),
+  head: () => ({
+    meta: [
+      { title: "Atacado e Revenda de Pescados | Pescados da Bia" },
+      { name: "description", content: "Seja revendedor da Pescados da Bia: cadastre sua empresa e receba a tabela de preços de distribuidor para pescados e congelados em Minas Gerais." },
+      { property: "og:title", content: "Atacado e Revenda de Pescados | Pescados da Bia" },
+      { property: "og:description", content: "Cadastre sua empresa e libere os preços de revenda de pescados e congelados." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: "Atacado e Revenda de Pescados | Pescados da Bia" },
+      { name: "twitter:description", content: "Tabela de distribuidor para supermercados, restaurantes e lojas." },
+    ],
+  }),
   component: Atacado,
 });
 

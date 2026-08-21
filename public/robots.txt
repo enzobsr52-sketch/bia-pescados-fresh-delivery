@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /admin
+
+Sitemap: https://bia-pescados-fresh-delivery.lovable.app/sitemap.xml

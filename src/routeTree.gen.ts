@@ -9,7 +9,9 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as TermosRouteImport } from './routes/termos'
 import { Route as SobreRouteImport } from './routes/sobre'
+import { Route as PrivacidadeRouteImport } from './routes/privacidade'
 import { Route as EntregasRouteImport } from './routes/entregas'
 import { Route as CheckoutRouteImport } from './routes/checkout'
 import { Route as CatalogoRouteImport } from './routes/catalogo'
@@ -19,9 +21,19 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as ProdutoIdRouteImport } from './routes/produto.$id'
 import { Route as AdminPedidosRouteImport } from './routes/admin.pedidos'
 
+const TermosRoute = TermosRouteImport.update({
+  id: '/termos',
+  path: '/termos',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const SobreRoute = SobreRouteImport.update({
   id: '/sobre',
   path: '/sobre',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PrivacidadeRoute = PrivacidadeRouteImport.update({
+  id: '/privacidade',
+  path: '/privacidade',
   getParentRoute: () => rootRouteImport,
 } as any)
 const EntregasRoute = EntregasRouteImport.update({
@@ -72,7 +84,9 @@ export interface FileRoutesByFullPath {
   '/catalogo': typeof CatalogoRoute
   '/checkout': typeof CheckoutRoute
   '/entregas': typeof EntregasRoute
+  '/privacidade': typeof PrivacidadeRoute
   '/sobre': typeof SobreRoute
+  '/termos': typeof TermosRoute
   '/admin/pedidos': typeof AdminPedidosRoute
   '/produto/$id': typeof ProdutoIdRoute
 }
@@ -83,7 +97,9 @@ export interface FileRoutesByTo {
   '/catalogo': typeof CatalogoRoute
   '/checkout': typeof CheckoutRoute
   '/entregas': typeof EntregasRoute
+  '/privacidade': typeof PrivacidadeRoute
   '/sobre': typeof SobreRoute
+  '/termos': typeof TermosRoute
   '/admin/pedidos': typeof AdminPedidosRoute
   '/produto/$id': typeof ProdutoIdRoute
 }
@@ -95,7 +111,9 @@ export interface FileRoutesById {
   '/catalogo': typeof CatalogoRoute
   '/checkout': typeof CheckoutRoute
   '/entregas': typeof EntregasRoute
+  '/privacidade': typeof PrivacidadeRoute
   '/sobre': typeof SobreRoute
+  '/termos': typeof TermosRoute
   '/admin/pedidos': typeof AdminPedidosRoute
   '/produto/$id': typeof ProdutoIdRoute
 }
@@ -108,7 +126,9 @@ export interface FileRouteTypes {
     | '/catalogo'
     | '/checkout'
     | '/entregas'
+    | '/privacidade'
     | '/sobre'
+    | '/termos'
     | '/admin/pedidos'
     | '/produto/$id'
   fileRoutesByTo: FileRoutesByTo
@@ -119,7 +139,9 @@ export interface FileRouteTypes {
     | '/catalogo'
     | '/checkout'
     | '/entregas'
+    | '/privacidade'
     | '/sobre'
+    | '/termos'
     | '/admin/pedidos'
     | '/produto/$id'
   id:
@@ -130,7 +152,9 @@ export interface FileRouteTypes {
     | '/catalogo'
     | '/checkout'
     | '/entregas'
+    | '/privacidade'
     | '/sobre'
+    | '/termos'
     | '/admin/pedidos'
     | '/produto/$id'
   fileRoutesById: FileRoutesById
@@ -142,18 +166,34 @@ export interface RootRouteChildren {
   CatalogoRoute: typeof CatalogoRoute
   CheckoutRoute: typeof CheckoutRoute
   EntregasRoute: typeof EntregasRoute
+  PrivacidadeRoute: typeof PrivacidadeRoute
   SobreRoute: typeof SobreRoute
+  TermosRoute: typeof TermosRoute
   AdminPedidosRoute: typeof AdminPedidosRoute
   ProdutoIdRoute: typeof ProdutoIdRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/termos': {
+      id: '/termos'
+      path: '/termos'
+      fullPath: '/termos'
+      preLoaderRoute: typeof TermosRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/sobre': {
       id: '/sobre'
       path: '/sobre'
       fullPath: '/sobre'
       preLoaderRoute: typeof SobreRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/privacidade': {
+      id: '/privacidade'
+      path: '/privacidade'
+      fullPath: '/privacidade'
+      preLoaderRoute: typeof PrivacidadeRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/entregas': {
@@ -222,10 +262,22 @@ const rootRouteChildren: RootRouteChildren = {
   CatalogoRoute: CatalogoRoute,
   CheckoutRoute: CheckoutRoute,
   EntregasRoute: EntregasRoute,
+  PrivacidadeRoute: PrivacidadeRoute,
   SobreRoute: SobreRoute,
+  TermosRoute: TermosRoute,
   AdminPedidosRoute: AdminPedidosRoute,
   ProdutoIdRoute: ProdutoIdRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}
