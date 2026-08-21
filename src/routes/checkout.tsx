@@ -10,7 +10,19 @@ import { company, waLink } from "@/lib/company";
 import { usePriceMode } from "@/lib/price-mode";
 
 export const Route = createFileRoute("/checkout")({
-  head: () => ({ meta: [{ title: "Checkout — Pescados da Bia" }] }),
+  head: () => ({
+    meta: [
+      { title: "Finalizar pedido com Pix | Pescados da Bia" },
+      { name: "description", content: "Pague seu pedido de pescados por Pix com QR Code e confirmação automática. Entrega refrigerada em Minas Gerais." },
+      { property: "og:title", content: "Finalizar pedido com Pix | Pescados da Bia" },
+      { property: "og:description", content: "Pagamento por Pix com QR Code e confirmação do pedido." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary" },
+      { name: "twitter:title", content: "Finalizar pedido com Pix | Pescados da Bia" },
+      { name: "twitter:description", content: "Pagamento por Pix com QR Code." },
+      { name: "robots", content: "noindex" },
+    ],
+  }),
   component: Checkout,
 });
 
