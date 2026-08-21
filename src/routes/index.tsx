@@ -30,51 +30,61 @@ function Home() {
       {/* HERO */}
       <section className="relative overflow-hidden bg-navy text-navy-foreground">
         <div className="absolute inset-0">
-          <img src={heroFish} alt="Filé de salmão fresco no gelo ao lado de camarões empanados crocantes" className="h-full w-full object-cover" width={1920} height={1088} />
+          <img
+            src={heroFish}
+            alt="Filés de salmão fresco sobre gelo em bancada de peixaria artesanal"
+            className="h-full w-full object-cover"
+            width={1600}
+            height={907}
+            fetchPriority="high"
+            decoding="async"
+          />
         </div>
         <div className="absolute inset-0 bg-gradient-to-r from-navy via-navy/85 to-navy/20" />
-        <div className="absolute inset-0 bg-navy/25 md:hidden" />
-        <div className="relative mx-auto grid max-w-7xl gap-8 px-4 py-20 md:py-28 lg:grid-cols-2">
-          <div>
+        <div className="absolute inset-0 bg-navy/40 md:hidden" />
+        <div className="relative mx-auto grid max-w-7xl gap-8 px-4 py-16 sm:py-20 md:py-28 lg:grid-cols-2">
+          <div className="min-w-0">
             <span className="inline-flex items-center gap-2 rounded-full bg-pink/20 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-pink">
-              <Star className="h-3 w-3 fill-pink" /> Promoção da semana
+              <Star className="h-3 w-3 fill-pink" /> Da nossa fábrica em Unaí-MG
             </span>
-            <h1 className="mt-5 font-display text-4xl leading-[0.95] sm:text-5xl md:text-6xl">
-              Sabor que <span className="text-pink">conquista.</span><br />
-              Qualidade que <span className="text-pink">permanece.</span>
+            <h1 className="mt-5 font-display text-[2rem] leading-[1.05] sm:text-5xl md:text-6xl">
+              Frescor que se <span className="text-pink">prova.</span><br />
+              Confiança que se <span className="text-pink">repete.</span>
             </h1>
-            <p className="mt-5 max-w-lg text-white/80">
-              Peixes frescos, filés, frutos do mar e congelados selecionados a dedo, entregues com agilidade na sua casa.
+            <p className="mt-5 max-w-lg text-sm text-white/85 sm:text-base">
+              Pescados, frutos do mar e produtos congelados selecionados, com qualidade,
+              padronização e agilidade para o seu negócio.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
               <Link
                 to="/catalogo"
-                className="inline-flex items-center gap-2 rounded-full bg-pink px-6 py-3 font-semibold text-pink-foreground shadow-pink transition-transform hover:scale-105"
+                className="inline-flex min-h-11 items-center gap-2 rounded-full bg-pink px-6 py-3 font-semibold text-pink-foreground shadow-pink transition-transform hover:scale-105"
               >
                 Ver catálogo <ArrowRight className="h-4 w-4" />
               </Link>
               <Link
                 to="/sobre"
-                className="inline-flex items-center gap-2 rounded-full border border-white/30 px-6 py-3 font-semibold text-white hover:bg-white/10"
+                className="inline-flex min-h-11 items-center gap-2 rounded-full border border-white/30 px-6 py-3 font-semibold text-white hover:bg-white/10"
               >
                 Conheça a Bia
               </Link>
             </div>
-            <div className="mt-10 grid max-w-md grid-cols-3 gap-4 text-xs">
+            <ul className="mt-10 grid max-w-md grid-cols-3 gap-3 text-xs">
               {[
                 { icon: Truck, label: "Entrega rápida" },
                 { icon: Snowflake, label: "Cadeia de frio" },
-                { icon: ShieldCheck, label: "100% Natural" },
+                { icon: BadgeCheck, label: "Selo de inspeção" },
               ].map((b) => (
-                <div key={b.label} className="rounded-xl bg-white/5 p-3 backdrop-blur">
-                  <b.icon className="mb-2 h-5 w-5 text-pink" />
-                  <div className="font-semibold">{b.label}</div>
-                </div>
+                <li key={b.label} className="rounded-xl bg-white/10 p-3 backdrop-blur">
+                  <b.icon className="mb-2 h-5 w-5 text-pink" aria-hidden="true" />
+                  <div className="font-semibold leading-tight">{b.label}</div>
+                </li>
               ))}
-            </div>
+            </ul>
           </div>
         </div>
       </section>
+
 
       {/* CATEGORIES */}
       <section className="mx-auto max-w-7xl px-4 py-14">
