@@ -40,8 +40,8 @@ function Home() {
             decoding="async"
           />
         </div>
-        <div className="absolute inset-0 bg-gradient-to-r from-navy via-navy/85 to-navy/20" />
-        <div className="absolute inset-0 bg-navy/40 md:hidden" />
+        <div className="absolute inset-0 bg-gradient-to-r from-grape via-grape/85 to-grape/20" />
+        <div className="absolute inset-0 bg-grape/40 md:hidden" />
         <div className="relative mx-auto grid max-w-7xl gap-8 px-4 py-16 sm:py-20 md:py-28 lg:grid-cols-2">
           <div className="min-w-0">
             <span className="inline-flex items-center gap-2 rounded-full bg-pink/20 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-pink">
