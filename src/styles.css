@@ -30,12 +30,14 @@
   --color-ring: var(--ring);
   --color-navy: var(--navy);
   --color-navy-foreground: var(--navy-foreground);
+  --color-grape: var(--grape);
+  --color-grape-foreground: var(--grape-foreground);
   --color-pink: var(--pink);
   --color-pink-foreground: var(--pink-foreground);
   --color-cream: var(--cream);
   --color-whats: var(--whats);
-  --font-display: "Archivo Black", system-ui, sans-serif;
-  --font-sans: "Inter", system-ui, sans-serif;
+  --font-display: "Baloo 2", system-ui, sans-serif;
+  --font-sans: "Nunito Sans", system-ui, sans-serif;
   --shadow-soft: 0 10px 30px -10px color-mix(in oklab, var(--navy) 25%, transparent);
   --shadow-pink: 0 10px 30px -10px color-mix(in oklab, var(--pink) 40%, transparent);
 }
