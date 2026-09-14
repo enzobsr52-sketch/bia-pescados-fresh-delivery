@@ -28,7 +28,7 @@ function Home() {
   return (
     <PageShell>
       {/* HERO */}
-      <section className="relative overflow-hidden bg-navy text-navy-foreground">
+      <section className="relative overflow-hidden bg-grape text-grape-foreground">
         <div className="absolute inset-0">
           <img
             src={heroFish}
