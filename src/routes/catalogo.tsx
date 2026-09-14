@@ -28,6 +28,7 @@ function Catalogo() {
   const [category, setCategory] = useState<string>(cat ?? "Todos");
   const [maxPrice, setMaxPrice] = useState(100);
   const [onlyAvailable, setOnlyAvailable] = useState(false);
+  const [showFilters, setShowFilters] = useState(false);
 
   const filtered = useMemo(() => {
     return products.filter((p) => {
