@@ -3,7 +3,7 @@ import { useMemo, useState } from "react";
 import { PageShell } from "@/components/PageShell";
 import { ProductCard } from "@/components/ProductCard";
 import { products, categories } from "@/lib/products";
-import { Search } from "lucide-react";
+import { Search, SlidersHorizontal } from "lucide-react";
 import { z } from "zod";
 import { fallback, zodValidator } from "@tanstack/zod-adapter";
 
@@ -28,6 +28,7 @@ function Catalogo() {
   const [category, setCategory] = useState<string>(cat ?? "Todos");
   const [maxPrice, setMaxPrice] = useState(100);
   const [onlyAvailable, setOnlyAvailable] = useState(false);
+  const [showFilters, setShowFilters] = useState(false);
 
   const filtered = useMemo(() => {
     return products.filter((p) => {
@@ -50,7 +51,17 @@ function Catalogo() {
 
       <div className="mx-auto grid max-w-7xl gap-8 px-4 py-10 lg:grid-cols-[260px_1fr]">
         {/* FILTERS */}
-        <aside className="space-y-6">
+        <aside className="space-y-4 lg:space-y-6">
+          <button
+            type="button"
+            onClick={() => setShowFilters((v) => !v)}
+            aria-expanded={showFilters}
+            className="flex min-h-11 w-full items-center justify-between rounded-full border border-border bg-card px-4 text-sm font-semibold text-navy lg:hidden"
+          >
+            {showFilters ? "Ocultar filtros" : "Filtrar produtos"}
+            <SlidersHorizontal className="h-4 w-4 text-pink" aria-hidden="true" />
+          </button>
+          <div className={`${showFilters ? "space-y-6" : "hidden"} lg:block lg:space-y-6`}>
           <div>
             <label className="mb-2 block text-xs font-semibold uppercase tracking-wider text-navy">Buscar</label>
             <div className="relative">
@@ -108,6 +119,7 @@ function Catalogo() {
             />
             Somente disponíveis
           </label>
+          </div>
         </aside>
 
         {/* GRID */}
