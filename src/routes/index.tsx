@@ -76,7 +76,7 @@ function Home() {
                 { icon: BadgeCheck, label: "Selo de inspeção" },
               ].map((b) => (
                 <li key={b.label} className="rounded-xl bg-white/10 p-3 backdrop-blur">
-                  <b.icon className="mb-2 h-5 w-5 text-pink" aria-hidden="true" />
+                  <b.icon className="mb-2 h-5 w-5 text-accent" aria-hidden="true" />
                   <div className="font-semibold leading-tight">{b.label}</div>
                 </li>
               ))}
