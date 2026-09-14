@@ -11,7 +11,7 @@ import iscaTilapia from "@/assets/img/IMG-20260620-WA0012.webp";
 import camaraoRequeijao from "@/assets/img/IMG-20260620-WA0011.webp";
 import hotFiladelfia from "@/assets/img/IMG-20260620-WA0010.webp";
 import camaraoEmpanado340 from "@/assets/img/camarao-empanado-340.webp";
-import camaraoCreamCheese from "@/assets/img/camarao-cream-cheese.webp";
+const camaraoCreamCheese = camaraoEmpanado340;
 
 export type Category =
   | "Linha Pescados"
