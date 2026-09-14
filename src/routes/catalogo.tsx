@@ -118,6 +118,7 @@ function Catalogo() {
             />
             Somente disponíveis
           </label>
+          </div>
         </aside>
 
         {/* GRID */}
