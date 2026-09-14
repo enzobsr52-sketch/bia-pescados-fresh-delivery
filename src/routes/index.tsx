@@ -28,7 +28,7 @@ function Home() {
   return (
     <PageShell>
       {/* HERO */}
-      <section className="relative overflow-hidden bg-navy text-navy-foreground">
+      <section className="relative overflow-hidden bg-grape text-grape-foreground">
         <div className="absolute inset-0">
           <img
             src={heroFish}
@@ -40,16 +40,16 @@ function Home() {
             decoding="async"
           />
         </div>
-        <div className="absolute inset-0 bg-gradient-to-r from-navy via-navy/85 to-navy/20" />
-        <div className="absolute inset-0 bg-navy/40 md:hidden" />
+        <div className="absolute inset-0 bg-gradient-to-r from-grape via-grape/85 to-grape/20" />
+        <div className="absolute inset-0 bg-grape/40 md:hidden" />
         <div className="relative mx-auto grid max-w-7xl gap-8 px-4 py-16 sm:py-20 md:py-28 lg:grid-cols-2">
           <div className="min-w-0">
-            <span className="inline-flex items-center gap-2 rounded-full bg-pink/20 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-pink">
-              <Star className="h-3 w-3 fill-pink" /> Da nossa fábrica em Unaí-MG
+            <span className="inline-flex items-center gap-2 rounded-full bg-pink px-3 py-1 text-xs font-semibold uppercase tracking-wider text-pink-foreground">
+              <Star className="h-3 w-3 fill-current" aria-hidden="true" /> Da nossa fábrica em Unaí-MG
             </span>
             <h1 className="mt-5 font-display text-[2rem] leading-[1.05] sm:text-5xl md:text-6xl">
-              Frescor que se <span className="text-pink">prova.</span><br />
-              Confiança que se <span className="text-pink">repete.</span>
+              Frescor que se <span className="text-accent">prova.</span><br />
+              Confiança que se <span className="text-accent">repete.</span>
             </h1>
             <p className="mt-5 max-w-lg text-sm text-white/85 sm:text-base">
               Pescados, frutos do mar e produtos congelados selecionados, com qualidade,
@@ -76,7 +76,7 @@ function Home() {
                 { icon: BadgeCheck, label: "Selo de inspeção" },
               ].map((b) => (
                 <li key={b.label} className="rounded-xl bg-white/10 p-3 backdrop-blur">
-                  <b.icon className="mb-2 h-5 w-5 text-pink" aria-hidden="true" />
+                  <b.icon className="mb-2 h-5 w-5 text-accent" aria-hidden="true" />
                   <div className="font-semibold leading-tight">{b.label}</div>
                 </li>
               ))}
