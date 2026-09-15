@@ -5,7 +5,7 @@ import { company } from "@/lib/company";
 
 export function Footer() {
   return (
-    <footer className="mt-20 bg-navy text-navy-foreground">
+    <footer className="bg-navy text-navy-foreground">
       <div className="mx-auto grid max-w-7xl gap-10 px-4 py-14 md:grid-cols-4">
         <div>
           <div className="flex items-center gap-3">

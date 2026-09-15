@@ -1,5 +1,5 @@
 import { Link } from "@tanstack/react-router";
-import { ShoppingCart, Menu, X } from "lucide-react";
+import { Search, ShoppingCart, Menu, X } from "lucide-react";
 import { useState } from "react";
 import { Logo } from "./Logo";
 import { useCart } from "@/lib/cart";
@@ -7,10 +7,10 @@ import { PriceModeBadge } from "./PriceModeBadge";
 
 const links = [
   { to: "/", label: "Início" },
-  { to: "/catalogo", label: "Catálogo" },
-  { to: "/atacado", label: "Atacado" },
-  { to: "/sobre", label: "Sobre" },
+  { to: "/catalogo", label: "Produtos" },
+  { to: "/sobre", label: "Sobre nós" },
   { to: "/entregas", label: "Entregas" },
+  { to: "/atacado", label: "Revenda" },
 ];
 
 export function Navbar() {
@@ -18,23 +18,23 @@ export function Navbar() {
   const [open, setOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-40 border-b border-border bg-background/90 backdrop-blur-md">
-      <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-3">
+    <header className="sticky top-0 z-40 border-b border-border bg-background/95 backdrop-blur-md">
+      <div className="mx-auto grid max-w-7xl grid-cols-[minmax(0,1fr)_auto] items-center gap-3 px-4 py-3 md:flex md:justify-between md:py-4">
         <Link to="/" className="flex items-center gap-2.5">
-          <Logo className="h-11 w-11" />
+          <Logo className="h-12 w-12 md:h-14 md:w-14" />
           <div className="leading-tight">
-            <div className="font-display text-lg text-navy">PESCADOS</div>
-            <div className="-mt-1 font-display text-sm text-pink">DA BIA</div>
+            <div className="font-display text-lg text-grape md:text-xl">PESCADOS</div>
+            <div className="-mt-1 font-display text-base text-pink md:text-lg">DA BIA</div>
           </div>
         </Link>
 
-        <nav className="hidden items-center gap-7 md:flex">
+        <nav className="hidden items-center gap-8 md:flex">
           {links.map((l) => (
             <Link
               key={l.to}
               to={l.to}
-              className="text-sm font-medium text-navy/80 transition-colors hover:text-pink"
-              activeProps={{ className: "text-pink" }}
+              className="border-b-2 border-transparent py-2 text-sm font-semibold text-navy/80 transition-colors hover:text-pink"
+              activeProps={{ className: "border-pink text-pink" }}
             >
               {l.label}
             </Link>
@@ -44,13 +44,21 @@ export function Navbar() {
         <div className="flex items-center gap-2">
           <PriceModeBadge />
           <Link
-            to="/carrinho"
-            className="relative inline-flex items-center gap-2 rounded-full bg-navy px-4 py-2 text-sm font-semibold text-navy-foreground transition-transform hover:scale-105"
+            to="/catalogo"
+            aria-label="Buscar produtos"
+            title="Buscar produtos"
+            className="hidden h-10 w-10 items-center justify-center text-navy transition-colors hover:text-pink sm:inline-flex"
           >
-            <ShoppingCart className="h-4 w-4" />
-            <span className="hidden sm:inline">Carrinho</span>
+            <Search className="h-5 w-5" />
+          </Link>
+          <Link
+            to="/carrinho"
+            aria-label="Abrir carrinho"
+            className="relative inline-flex h-10 w-10 items-center justify-center text-navy transition-colors hover:text-pink"
+          >
+            <ShoppingCart className="h-6 w-6" />
             {count > 0 && (
-              <span className="ml-1 inline-flex h-5 min-w-5 items-center justify-center rounded-full bg-pink px-1.5 text-xs font-bold text-pink-foreground">
+              <span className="absolute right-0 top-0 inline-flex h-4 min-w-4 items-center justify-center rounded-full bg-pink px-1 text-[10px] font-bold text-pink-foreground">
                 {count}
               </span>
             )}
