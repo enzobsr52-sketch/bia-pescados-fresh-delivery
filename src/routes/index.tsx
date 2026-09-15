@@ -69,11 +69,12 @@ function Home() {
                 Conheça a Bia
               </Link>
             </div>
-            <ul className="mt-10 grid max-w-md grid-cols-3 gap-3 text-xs">
+            <ul className="mt-10 grid max-w-lg grid-cols-2 gap-3 text-xs sm:grid-cols-4">
               {[
                 { icon: Truck, label: "Entrega rápida" },
-                { icon: Snowflake, label: "Cadeia de frio" },
-                { icon: BadgeCheck, label: "Selo de inspeção" },
+                { icon: Snowflake, label: "Produtos congelados" },
+                { icon: BadgeCheck, label: "Procedência garantida" },
+                { icon: Star, label: "Atendimento especial" },
               ].map((b) => (
                 <li key={b.label} className="rounded-xl bg-white/10 p-3 backdrop-blur">
                   <b.icon className="mb-2 h-5 w-5 text-accent" aria-hidden="true" />
@@ -112,7 +113,10 @@ function Home() {
       {/* FEATURED */}
       <section className="mx-auto max-w-7xl px-4 pb-14">
         <div className="mb-6 flex items-end justify-between">
-          <h2 className="font-display text-2xl text-navy sm:text-3xl">Destaques da semana</h2>
+          <div>
+            <div className="text-xs font-semibold uppercase tracking-widest text-pink">Nossos produtos</div>
+            <h2 className="font-display text-2xl text-navy sm:text-3xl">Do mar para a sua mesa.</h2>
+          </div>
           <Link to="/catalogo" className="text-sm font-semibold text-pink hover:underline">
             Ver tudo →
           </Link>
