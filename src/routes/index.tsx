@@ -45,15 +45,15 @@ function Home() {
         <div className="relative mx-auto grid max-w-7xl gap-8 px-4 py-16 sm:py-20 md:py-28 lg:grid-cols-2">
           <div className="min-w-0">
             <span className="inline-flex items-center gap-2 rounded-full bg-pink px-3 py-1 text-xs font-semibold uppercase tracking-wider text-pink-foreground">
-              <Star className="h-3 w-3 fill-current" aria-hidden="true" /> Da nossa fábrica em Unaí-MG
+              Peixes, frutos do mar e produtos congelados
             </span>
             <h1 className="mt-5 font-display text-[2rem] leading-[1.05] sm:text-5xl md:text-6xl">
-              Frescor que se <span className="text-accent">prova.</span><br />
-              Confiança que se <span className="text-accent">repete.</span>
+              Sabor e qualidade<br />
+              <span className="text-accent">em cada refeição.</span>
             </h1>
             <p className="mt-5 max-w-lg text-sm text-white/85 sm:text-base">
-              Pescados, frutos do mar e produtos congelados selecionados, com qualidade,
-              padronização e agilidade para o seu negócio.
+              Produtos selecionados, com procedência e praticidade para o seu dia a dia —
+              direto da nossa fábrica em Unaí-MG para a sua mesa ou o seu negócio.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
               <Link
