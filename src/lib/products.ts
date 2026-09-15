@@ -8,10 +8,10 @@ import bolinhoTilapia from "@/assets/img/IMG-20260620-WA0014.webp";
 import bolinhoCamarao from "@/assets/img/IMG-20260620-WA0015.webp";
 import bolinhoBacalhau from "@/assets/img/IMG-20260620-WA0013.webp";
 import iscaTilapia from "@/assets/img/IMG-20260620-WA0012.webp";
-import camaraoRequeijao from "@/assets/img/IMG-20260620-WA0011.webp";
 import hotFiladelfia from "@/assets/img/IMG-20260620-WA0010.webp";
 import camaraoEmpanado340 from "@/assets/img/camarao-empanado-340.webp";
 import camaraoCreamCheese from "@/assets/img/camarao-cream-cheese.webp";
+import miniTemaki from "@/assets/img/mini-temaki.webp";
 
 export type Category =
   | "Linha Pescados"
@@ -121,17 +121,18 @@ export const products: Product[] = [
     featured: true,
   },
   {
-    id: "camarao-requeijao",
-    name: "Camarão Recheado com Requeijão Cremoso",
+    id: "mini-temaki",
+    name: "Mini Temaki Recheado com Salmão e Cream Cheese",
     category: "Empanados & Prontos",
     priceRetail: 45.9,
     priceWholesale: 33.9,
     boxQty: 12,
     boxPrice: 406.8,
     weight: "400g",
-    image: camaraoRequeijao,
-    description: "Camarões empanados recheados com requeijão cremoso. Sucesso garantido nas festas.",
+    image: miniTemaki,
+    description: "Mini temakis empanados recheados com salmão e cream cheese. Crocantes por fora, cremosos por dentro — prontos para fritar.",
     inStock: true,
+    featured: true,
   },
   {
     id: "hot-filadelfia",
