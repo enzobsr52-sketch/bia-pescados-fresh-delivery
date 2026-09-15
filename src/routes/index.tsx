@@ -1,8 +1,9 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { PageShell } from "@/components/PageShell";
-import { ProductCard } from "@/components/ProductCard";
-import { products, categories } from "@/lib/products";
-import { ArrowRight, Truck, Snowflake, BadgeCheck, Star } from "lucide-react";
+import { products, type Product } from "@/lib/products";
+import { PriceTag } from "@/components/PriceTag";
+import { useCart } from "@/lib/cart";
+import { ArrowRight, Truck, Snowflake, BadgeCheck, Heart, ShoppingBasket, PackageCheck, Package, Megaphone } from "lucide-react";
 import heroFish from "@/assets/img/hero-pescados.webp";
 
 export const Route = createFileRoute("/")({
@@ -17,140 +18,161 @@ export const Route = createFileRoute("/")({
   component: Home,
 });
 
-const testimonials = [
-  { name: "Mariana S.", text: "Salmão sempre fresquinho e entrega super rápida. Virei cliente fiel!", rating: 5 },
-  { name: "Roberto L.", text: "A costela de tambaqui é simplesmente sensacional. Recomendo demais.", rating: 5 },
-  { name: "Patrícia A.", text: "Atendimento maravilhoso e produtos de altíssima qualidade.", rating: 5 },
+const featuredIds = [
+  "bolinho-bacalhau",
+  "bolinho-camarao",
+  "camarao-cream-cheese",
+  "file-salmao",
+  "costela-tambaqui",
+  "camarao-gg",
 ];
 
+const benefits = [
+  { icon: Truck, title: "Entrega rápida", text: "Seu pedido no prazo e com segurança." },
+  { icon: Snowflake, title: "Produtos congelados", text: "Mais frescor e qualidade em cada escolha." },
+  { icon: BadgeCheck, title: "Procedência garantida", text: "Selecionamos o melhor para você." },
+  { icon: Heart, title: "Atendimento especial", text: "Estamos aqui para ajudar sempre." },
+];
+
+function HomeProductCard({ product }: { product: Product }) {
+  const { add } = useCart();
+  return (
+    <article className="group flex min-w-0 flex-col rounded-lg border border-border bg-card p-3 transition-all hover:-translate-y-1 hover:shadow-soft">
+      <Link to="/produto/$id" params={{ id: product.id }} className="flex aspect-[4/3] items-center justify-center overflow-hidden rounded-md bg-cream">
+        <img src={product.image} alt={product.name} loading="lazy" className="h-full w-full object-contain p-2 transition-transform duration-300 group-hover:scale-105" />
+      </Link>
+      <span className="mt-4 text-[9px] font-bold uppercase text-pink">{product.category}</span>
+      <Link to="/produto/$id" params={{ id: product.id }} className="mt-1 min-h-10 font-display text-sm leading-tight text-navy hover:text-pink">
+        {product.name}
+      </Link>
+      <div className="mt-auto flex items-end justify-between gap-2 pt-3">
+        <PriceTag product={product} />
+        <button onClick={() => add(product.id)} aria-label={`Adicionar ${product.name} ao carrinho`} className="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-pink text-pink transition-colors hover:bg-pink hover:text-pink-foreground">
+          <ArrowRight className="h-4 w-4" />
+        </button>
+      </div>
+    </article>
+  );
+}
+
 function Home() {
-  const featured = products.filter((p) => p.featured);
+  const featured = featuredIds.map((id) => products.find((product) => product.id === id)).filter((product): product is Product => Boolean(product));
   return (
     <PageShell>
-      {/* HERO */}
       <section className="relative overflow-hidden bg-grape text-grape-foreground">
         <div className="absolute inset-0">
           <img
             src={heroFish}
             alt="Filés de salmão fresco sobre gelo em bancada de peixaria artesanal"
-            className="h-full w-full object-cover"
+            className="h-full w-full object-cover object-center md:object-[70%_50%]"
             width={1600}
             height={907}
             fetchPriority="high"
             decoding="async"
           />
         </div>
-        <div className="absolute inset-0 bg-gradient-to-r from-grape via-grape/85 to-grape/20" />
-        <div className="absolute inset-0 bg-grape/40 md:hidden" />
-        <div className="relative mx-auto grid max-w-7xl gap-8 px-4 py-16 sm:py-20 md:py-28 lg:grid-cols-2">
-          <div className="min-w-0">
-            <span className="inline-flex items-center gap-2 rounded-full bg-pink px-3 py-1 text-xs font-semibold uppercase tracking-wider text-pink-foreground">
+        <div className="absolute inset-0 bg-gradient-to-r from-grape via-grape/90 to-grape/10" />
+        <div className="absolute inset-0 bg-grape/35 md:hidden" />
+        <div className="relative mx-auto max-w-7xl px-4 py-14 sm:py-20 md:py-24">
+          <div className="max-w-xl min-w-0">
+            <span className="text-xs font-bold uppercase text-grape-foreground/90">
               Peixes, frutos do mar e produtos congelados
             </span>
-            <h1 className="mt-5 font-display text-[2rem] leading-[1.05] sm:text-5xl md:text-6xl">
-              Sabor e qualidade<br />
+            <h1 className="mt-4 font-display text-[2.25rem] leading-[1.02] sm:text-5xl md:text-6xl">
+              Sabor e qualidade<br className="hidden sm:block" />
               <span className="text-accent">em cada refeição.</span>
             </h1>
-            <p className="mt-5 max-w-lg text-sm text-white/85 sm:text-base">
-              Produtos selecionados, com procedência e praticidade para o seu dia a dia —
-              direto da nossa fábrica em Unaí-MG para a sua mesa ou o seu negócio.
+            <p className="mt-5 max-w-md text-sm leading-relaxed text-grape-foreground/90 sm:text-base">
+              Produtos selecionados, com procedência e praticidade para o seu dia a dia.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
               <Link
                 to="/catalogo"
-                className="inline-flex min-h-11 items-center gap-2 rounded-full bg-pink px-6 py-3 font-semibold text-pink-foreground shadow-pink transition-transform hover:scale-105"
+                className="inline-flex min-h-11 items-center gap-2 rounded-full bg-pink px-7 py-3 text-sm font-bold text-pink-foreground shadow-pink transition-transform hover:scale-105"
               >
                 Ver catálogo <ArrowRight className="h-4 w-4" />
               </Link>
               <Link
                 to="/sobre"
-                className="inline-flex min-h-11 items-center gap-2 rounded-full border border-white/30 px-6 py-3 font-semibold text-white hover:bg-white/10"
+                className="inline-flex min-h-11 items-center gap-2 rounded-full border border-grape-foreground/70 px-7 py-3 text-sm font-bold text-grape-foreground hover:bg-grape-foreground/10"
               >
                 Conheça a Bia
               </Link>
             </div>
-            <ul className="mt-10 grid max-w-lg grid-cols-2 gap-3 text-xs sm:grid-cols-4">
-              {[
-                { icon: Truck, label: "Entrega rápida" },
-                { icon: Snowflake, label: "Produtos congelados" },
-                { icon: BadgeCheck, label: "Procedência garantida" },
-                { icon: Star, label: "Atendimento especial" },
-              ].map((b) => (
-                <li key={b.label} className="rounded-xl bg-white/10 p-3 backdrop-blur">
-                  <b.icon className="mb-2 h-5 w-5 text-accent" aria-hidden="true" />
-                  <div className="font-semibold leading-tight">{b.label}</div>
-                </li>
-              ))}
-            </ul>
           </div>
         </div>
       </section>
 
-
-      {/* CATEGORIES */}
-      <section className="mx-auto max-w-7xl px-4 py-14">
-        <div className="mb-6 flex items-end justify-between">
-          <div>
-            <h2 className="font-display text-2xl text-navy sm:text-3xl">Categorias</h2>
-            <p className="text-sm text-muted-foreground">Encontre o pescado perfeito para sua mesa</p>
-          </div>
-        </div>
-        <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-5">
-          {categories.map((c) => (
-            <Link
-              key={c}
-              to="/catalogo"
-              search={{ cat: c } as never}
-              className="group rounded-2xl border border-border bg-card p-5 transition-all hover:-translate-y-1 hover:border-pink hover:shadow-soft"
-            >
-              <div className="font-display text-sm text-navy group-hover:text-pink">{c}</div>
-              <div className="mt-1 text-xs text-muted-foreground">Ver produtos →</div>
-            </Link>
+      <section className="border-b border-border bg-background" aria-label="Vantagens">
+        <div className="mx-auto grid max-w-7xl grid-cols-2 px-4 py-6 md:grid-cols-4 md:py-8">
+          {benefits.map((benefit, index) => (
+            <div key={benefit.title} className={`px-3 py-4 text-center md:px-7 ${index % 2 === 1 ? "border-l border-border" : ""} ${index > 1 ? "border-t border-border md:border-t-0" : ""} ${index > 0 ? "md:border-l" : ""}`}>
+              <div className="mx-auto flex h-11 w-11 items-center justify-center rounded-full bg-accent text-pink">
+                <benefit.icon className="h-6 w-6" aria-hidden="true" />
+              </div>
+              <h2 className="mt-3 font-display text-sm text-navy sm:text-base">{benefit.title}</h2>
+              <p className="mx-auto mt-1 max-w-40 text-xs leading-relaxed text-muted-foreground">{benefit.text}</p>
+            </div>
           ))}
         </div>
       </section>
 
-      {/* FEATURED */}
-      <section className="mx-auto max-w-7xl px-4 pb-14">
-        <div className="mb-6 flex items-end justify-between">
+      <section className="mx-auto max-w-7xl px-4 py-14 md:py-16">
+        <div className="mb-7 grid grid-cols-[minmax(0,1fr)_auto] items-end gap-4">
           <div>
             <div className="text-xs font-semibold uppercase tracking-widest text-pink">Nossos produtos</div>
-            <h2 className="font-display text-2xl text-navy sm:text-3xl">Do mar para a sua mesa.</h2>
+            <h2 className="font-display text-2xl text-navy sm:text-4xl">Do mar para a <span className="text-pink">sua mesa.</span></h2>
+            <p className="mt-2 max-w-md text-sm text-muted-foreground">Confira nossas categorias e escolha o que mais combina com você.</p>
           </div>
-          <Link to="/catalogo" className="text-sm font-semibold text-pink hover:underline">
-            Ver tudo →
+          <Link to="/catalogo" className="hidden min-h-11 items-center gap-2 rounded-full border border-pink px-5 py-2 text-sm font-bold text-pink hover:bg-pink hover:text-pink-foreground sm:inline-flex">
+            Ver todos os produtos <ArrowRight className="h-4 w-4" />
           </Link>
         </div>
-        <div className="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4">
-          {featured.map((p) => <ProductCard key={p.id} product={p} />)}
+        <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-6">
+          {featured.map((product) => <HomeProductCard key={product.id} product={product} />)}
         </div>
+        <Link to="/catalogo" className="mt-6 inline-flex min-h-11 items-center gap-2 rounded-full border border-pink px-5 py-2 text-sm font-bold text-pink sm:hidden">Ver todos os produtos <ArrowRight className="h-4 w-4" /></Link>
       </section>
 
-      {/* PROMO BANNER */}
-      <section className="mx-auto max-w-7xl px-4 pb-14">
-        <div className="overflow-hidden rounded-3xl bg-gradient-to-r from-pink to-pink/70 p-8 text-pink-foreground md:p-12">
-          <div className="max-w-xl">
-            <div className="text-xs font-semibold uppercase tracking-widest">Frota própria</div>
-            <h3 className="mt-2 font-display text-3xl md:text-4xl">Entrega refrigerada em toda a região.</h3>
-            <p className="mt-3 text-white/90">Do Noroeste de Minas ao Triângulo, DF e Goiás. Confira as áreas atendidas.</p>
-            <Link to="/entregas" className="mt-5 inline-flex items-center gap-2 rounded-full bg-navy px-5 py-2.5 text-sm font-semibold text-navy-foreground">
-              Ver regiões <ArrowRight className="h-4 w-4" />
-            </Link>
+      <section className="bg-secondary py-14 md:py-16">
+        <div className="mx-auto grid max-w-7xl gap-10 px-4 lg:grid-cols-[1fr_2fr] lg:items-center">
+          <div>
+            <div className="font-display text-2xl text-pink">Como funciona</div>
+            <h2 className="mt-2 font-display text-2xl leading-tight text-navy sm:text-3xl">Do pedido à entrega,<br />é simples!</h2>
+            <p className="mt-3 max-w-sm text-sm text-muted-foreground">Facilitamos o seu dia a dia para que você foque no que realmente importa: o seu negócio.</p>
+          </div>
+          <ol className="grid gap-6 sm:grid-cols-3">
+            {[
+              { icon: ShoppingBasket, title: "Escolha os produtos", text: "Navegue pelo nosso catálogo e faça seu pedido." },
+              { icon: PackageCheck, title: "Preparamos com cuidado", text: "Tudo é selecionado e embalado com segurança." },
+              { icon: Truck, title: "Entregamos para você", text: "Com agilidade e pontualidade." },
+            ].map((step, index) => (
+              <li key={step.title} className="relative text-center">
+                <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-accent text-pink"><step.icon className="h-6 w-6" /></div>
+                <h3 className="mt-4 font-display text-sm text-navy">{step.title}</h3>
+                <p className="mx-auto mt-2 max-w-44 text-xs leading-relaxed text-muted-foreground">{step.text}</p>
+                {index < 2 && <ArrowRight className="absolute -right-3 top-4 hidden h-4 w-4 text-pink/60 sm:block" aria-hidden="true" />}
+              </li>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* TESTIMONIALS */}
-      <section className="mx-auto max-w-7xl px-4 pb-20">
-        <h2 className="mb-6 font-display text-2xl text-navy sm:text-3xl">O que dizem nossos clientes</h2>
-        <div className="grid gap-4 md:grid-cols-3">
-          {testimonials.map((t) => (
-            <div key={t.name} className="rounded-2xl border border-border bg-card p-6">
-              <div className="mb-3 flex gap-0.5 text-pink">
-                {Array.from({ length: t.rating }).map((_, i) => <Star key={i} className="h-4 w-4 fill-pink" />)}
-              </div>
-              <p className="text-sm text-foreground/80">"{t.text}"</p>
-              <div className="mt-4 text-xs font-semibold text-navy">{t.name}</div>
+      <section className="mx-auto grid max-w-7xl gap-8 px-4 py-14 md:grid-cols-[1fr_1.8fr] md:items-center md:py-16">
+        <div>
+          <div className="flex items-center gap-2 text-xs font-bold uppercase text-pink"><Megaphone className="h-5 w-5" /> Fique por dentro</div>
+          <h2 className="mt-3 font-display text-2xl leading-tight text-navy sm:text-3xl">Novidades, receitas e dicas do mundo dos pescados.</h2>
+          <Link to="/catalogo" className="mt-5 inline-flex min-h-11 items-center gap-2 rounded-full border border-pink px-5 py-2 text-sm font-bold text-pink hover:bg-pink hover:text-pink-foreground">Ver todas <ArrowRight className="h-4 w-4" /></Link>
+        </div>
+        <div className="grid grid-cols-3 gap-3">
+          {[
+            { label: "Receitas", image: products.find((p) => p.id === "camarao-empanado")?.image },
+            { label: "Novidades", image: heroFish },
+            { label: "Dicas", image: products.find((p) => p.id === "posta-tambaqui")?.image },
+          ].map((item) => (
+            <div key={item.label} className="relative aspect-[4/3] overflow-hidden rounded-lg bg-cream">
+              {item.image && <img src={item.image} alt="" loading="lazy" className="h-full w-full object-cover" />}
+              <span className="absolute bottom-2 left-2 rounded-full bg-pink px-3 py-1 text-[10px] font-bold text-pink-foreground">{item.label}</span>
             </div>
           ))}
         </div>
