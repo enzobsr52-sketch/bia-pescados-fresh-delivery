@@ -13,6 +13,8 @@ export const Route = createFileRoute("/")({
       { name: "description", content: "Compre pescados frescos, filés, frutos do mar e congelados direto da Pescados da Bia. Entrega rápida e qualidade garantida." },
       { property: "og:title", content: "Pescados da Bia — Peixes frescos e congelados com entrega" },
       { property: "og:description", content: "Compre pescados frescos, filés, frutos do mar e congelados direto da Pescados da Bia. Entrega rápida e qualidade garantida." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
   component: Home,
@@ -71,15 +73,14 @@ function Home() {
           />
         </div>
         <div className="absolute inset-0 bg-gradient-to-r from-grape via-grape/90 to-grape/10" />
-        <div className="absolute inset-0 bg-grape/35 md:hidden" />
+        <div className="absolute inset-0 bg-grape/55 md:hidden" />
         <div className="relative mx-auto max-w-7xl px-4 py-14 sm:py-20 md:py-24">
           <div className="max-w-xl min-w-0">
             <span className="text-xs font-bold uppercase text-grape-foreground/90">
               Peixes, frutos do mar e produtos congelados
             </span>
             <h1 className="mt-4 font-display text-[2.25rem] leading-[1.02] sm:text-5xl md:text-6xl">
-              Sabor e qualidade<br className="hidden sm:block" />
-              <span className="text-accent">em cada refeição.</span>
+              Sabor e qualidade<br className="hidden sm:block" /> em cada refeição.
             </h1>
             <p className="mt-5 max-w-md text-sm leading-relaxed text-grape-foreground/90 sm:text-base">
               Produtos selecionados, com procedência e praticidade para o seu dia a dia.
