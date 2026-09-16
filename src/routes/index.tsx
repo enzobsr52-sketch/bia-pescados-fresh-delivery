@@ -122,7 +122,7 @@ function Home() {
             <div className="text-xs font-semibold uppercase tracking-widest text-pink">Nossos produtos</div>
             <h2 className="font-display text-2xl text-navy sm:text-4xl">Do mar para a <span className="text-pink">sua mesa.</span></h2>
             <p className="mt-2 max-w-md text-sm text-muted-foreground">Confira nossas categorias e escolha o que mais combina com você.</p>
-          </ol>
+          </div>
           <Link to="/catalogo" className="hidden min-h-11 items-center gap-2 rounded-full border border-pink px-5 py-2 text-sm font-bold text-pink hover:bg-pink hover:text-pink-foreground sm:inline-flex">
             Ver todos os produtos <ArrowRight className="h-4 w-4" />
           </Link>
@@ -153,7 +153,7 @@ function Home() {
                 {index < 2 && <ArrowRight className="absolute -right-3 top-4 hidden h-4 w-4 text-pink/60 sm:block" aria-hidden="true" />}
               </li>
             ))}
-          </div>
+          </ol>
         </div>
       </section>
 
