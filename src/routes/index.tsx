@@ -119,8 +119,7 @@ function Home() {
       <section className="mx-auto max-w-7xl px-4 py-14 md:py-16">
         <div className="mb-7 grid grid-cols-[minmax(0,1fr)_auto] items-end gap-4">
           <div>
-            <div className="text-xs font-semibold uppercase tracking-widest text-pink">Nossos produtos</div>
-            <h2 className="font-display text-2xl text-navy sm:text-4xl">Do mar para a <span className="text-pink">sua mesa.</span></h2>
+            <h2 className="text-xs font-semibold uppercase tracking-widest text-pink">Nossos produtos</h2>
             <p className="mt-2 max-w-md text-sm text-muted-foreground">Confira nossas categorias e escolha o que mais combina com você.</p>
           </div>
           <Link to="/catalogo" className="hidden min-h-11 items-center gap-2 rounded-full border border-pink px-5 py-2 text-sm font-bold text-pink hover:bg-pink hover:text-pink-foreground sm:inline-flex">
