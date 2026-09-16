@@ -8,7 +8,6 @@ import bolinhoTilapia from "@/assets/img/IMG-20260620-WA0014.webp";
 import bolinhoCamarao from "@/assets/img/IMG-20260620-WA0015.webp";
 import bolinhoBacalhau from "@/assets/img/IMG-20260620-WA0013.webp";
 import iscaTilapia from "@/assets/img/IMG-20260620-WA0012.webp";
-import hotFiladelfia from "@/assets/img/IMG-20260620-WA0010.webp";
 import camaraoEmpanado340 from "@/assets/img/camarao-empanado-340.webp";
 import camaraoCreamCheese from "@/assets/img/camarao-cream-cheese.webp";
 import miniTemaki from "@/assets/img/mini-temaki.webp";
