@@ -18,7 +18,6 @@ export function ProductCard({ product }: { product: Product }) {
         />
       </Link>
       <div className="flex flex-1 flex-col gap-2 p-4">
-        <span className="text-[10px] font-semibold uppercase tracking-wider text-pink">{product.category}</span>
         <Link to="/produto/$id" params={{ id: product.id }} className="font-display text-sm leading-tight text-navy hover:text-pink">
           {product.name}
         </Link>

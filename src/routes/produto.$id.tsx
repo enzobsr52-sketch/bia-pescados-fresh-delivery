@@ -120,7 +120,7 @@ function ProductPage() {
           <div className="mt-8 grid grid-cols-3 gap-3 text-xs">
             {[
               { icon: Snowflake, label: "Congelado a -18°C" },
-              { icon: ShieldCheck, label: "100% Natural" },
+              { icon: ShieldCheck, label: "Selo de inspeção" },
               { icon: Truck, label: "Entrega refrigerada" },
             ].map((b) => (
               <div key={b.label} className="rounded-xl border border-border bg-card p-3 text-center">

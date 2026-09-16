@@ -12,6 +12,8 @@ import hotFiladelfia from "@/assets/img/IMG-20260620-WA0010.webp";
 import camaraoEmpanado340 from "@/assets/img/camarao-empanado-340.webp";
 import camaraoCreamCheese from "@/assets/img/camarao-cream-cheese.webp";
 import miniTemaki from "@/assets/img/mini-temaki.webp";
+import hotFiladelfiaProduto from "@/assets/img/hot-filadelfia.webp";
+import camaraoRequeijao from "@/assets/img/camarao-requeijao.webp";
 
 export type Category =
   | "Linha Pescados"
@@ -121,6 +123,19 @@ export const products: Product[] = [
     featured: true,
   },
   {
+    id: "camarao-requeijao",
+    name: "Camarão Empanado Recheado com Requeijão Cremoso",
+    category: "Empanados & Prontos",
+    priceRetail: 45.9,
+    priceWholesale: 33.9,
+    boxQty: 12,
+    boxPrice: 406.8,
+    weight: "400g",
+    image: camaraoRequeijao,
+    description: "Camarões empanados recheados com requeijão cremoso. Crocantes por fora e cremosos por dentro, prontos para fritar.",
+    inStock: true,
+  },
+  {
     id: "mini-temaki",
     name: "Mini Temaki Recheado com Salmão e Cream Cheese",
     category: "Empanados & Prontos",
@@ -143,7 +158,7 @@ export const products: Product[] = [
     boxQty: 12,
     boxPrice: 466.8,
     weight: "500g",
-    image: hotFiladelfia,
+    image: hotFiladelfiaProduto,
     description: "Sushi empanado recheado com salmão e cream cheese, pronto para fritar. Crocante por fora, cremoso por dentro.",
     inStock: true,
     featured: true,
@@ -206,12 +221,12 @@ export const products: Product[] = [
   {
     id: "file-salmao",
     name: "Filé de Salmão com Pele",
-    category: "Linha Pescados",
+    category: "Frutos do Mar",
     priceRetail: 66.9,
     priceWholesale: 48.5,
     boxQty: 25,
     boxPrice: 1212.5,
-    weight: "porção",
+    weight: "400g",
     image: salmao,
     description: "Filé de salmão congelado com pele, rico em ômega 3. Ideal para grelhar, assar ou preparar em receitas asiáticas.",
     inStock: true,

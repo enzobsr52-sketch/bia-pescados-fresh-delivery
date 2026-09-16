@@ -15,9 +15,6 @@ export function Footer() {
               <div className="-mt-1 text-sm text-pink">DA BIA</div>
             </div>
           </div>
-          <p className="mt-4 text-sm text-white/70">
-            Sabor que conquista. Qualidade que permanece. Pescados frescos e congelados direto para sua casa.
-          </p>
         </div>
 
         <nav aria-label="Navegação do rodapé">

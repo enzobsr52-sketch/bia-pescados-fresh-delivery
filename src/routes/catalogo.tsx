@@ -17,6 +17,10 @@ export const Route = createFileRoute("/catalogo")({
     meta: [
       { title: "Catálogo — Pescados da Bia" },
       { name: "description", content: "Catálogo completo de peixes frescos, filés, frutos do mar e congelados da Pescados da Bia." },
+      { property: "og:title", content: "Catálogo — Pescados da Bia" },
+      { property: "og:description", content: "Escolha pescados, frutos do mar e produtos congelados selecionados." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary" },
     ],
   }),
   component: Catalogo,
@@ -129,7 +133,7 @@ function Catalogo() {
               Nenhum produto encontrado com esses filtros.
             </div>
           ) : (
-            <div className="grid grid-cols-2 gap-4 md:grid-cols-3">
+             <div className="grid grid-cols-2 gap-3 sm:gap-4 md:grid-cols-3">
               {filtered.map((p) => <ProductCard key={p.id} product={p} />)}
             </div>
           )}

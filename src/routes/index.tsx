@@ -41,8 +41,7 @@ function HomeProductCard({ product }: { product: Product }) {
       <Link to="/produto/$id" params={{ id: product.id }} className="flex aspect-[4/3] items-center justify-center overflow-hidden rounded-md bg-cream">
         <img src={product.image} alt={product.name} loading="lazy" className="h-full w-full object-contain p-2 transition-transform duration-300 group-hover:scale-105" />
       </Link>
-      <span className="mt-4 text-[9px] font-bold uppercase text-pink">{product.category}</span>
-      <Link to="/produto/$id" params={{ id: product.id }} className="mt-1 min-h-10 font-display text-sm leading-tight text-navy hover:text-pink">
+      <Link to="/produto/$id" params={{ id: product.id }} className="mt-4 min-h-10 font-display text-sm leading-tight text-navy hover:text-pink">
         {product.name}
       </Link>
       <div className="mt-auto flex items-end justify-between gap-2 pt-3">
@@ -99,7 +98,7 @@ function Home() {
                 Conheça a Bia
               </Link>
             </div>
-          </div>
+          </ol>
         </div>
       </section>
 
