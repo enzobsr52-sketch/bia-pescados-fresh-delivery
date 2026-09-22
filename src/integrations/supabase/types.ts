@@ -14,13 +14,328 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      notification_outbox: {
+        Row: {
+          attempts: number
+          channel: string
+          created_at: string
+          event_type: string
+          id: string
+          last_attempt_at: string | null
+          last_error: string | null
+          next_attempt_at: string
+          order_id: string
+          provider_message_id: string | null
+          sent_at: string | null
+          status: string
+          updated_at: string
+        }
+        Insert: {
+          attempts?: number
+          channel?: string
+          created_at?: string
+          event_type?: string
+          id?: string
+          last_attempt_at?: string | null
+          last_error?: string | null
+          next_attempt_at?: string
+          order_id: string
+          provider_message_id?: string | null
+          sent_at?: string | null
+          status?: string
+          updated_at?: string
+        }
+        Update: {
+          attempts?: number
+          channel?: string
+          created_at?: string
+          event_type?: string
+          id?: string
+          last_attempt_at?: string | null
+          last_error?: string | null
+          next_attempt_at?: string
+          order_id?: string
+          provider_message_id?: string | null
+          sent_at?: string | null
+          status?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "notification_outbox_order_id_fkey"
+            columns: ["order_id"]
+            isOneToOne: false
+            referencedRelation: "orders"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      order_items: {
+        Row: {
+          created_at: string
+          id: string
+          order_id: string
+          product_id: string
+          product_name: string
+          product_weight: string
+          quantity: number
+          subtotal_cents: number
+          unit_price_cents: number
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          order_id: string
+          product_id: string
+          product_name: string
+          product_weight: string
+          quantity: number
+          subtotal_cents: number
+          unit_price_cents: number
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          order_id?: string
+          product_id?: string
+          product_name?: string
+          product_weight?: string
+          quantity?: number
+          subtotal_cents?: number
+          unit_price_cents?: number
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "order_items_order_id_fkey"
+            columns: ["order_id"]
+            isOneToOne: false
+            referencedRelation: "orders"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      orders: {
+        Row: {
+          address_cep: string
+          address_city: string
+          address_complement: string | null
+          address_country: string
+          address_neighborhood: string
+          address_number: string
+          address_state: string
+          address_street: string
+          address_verified_at: string
+          approved_at: string | null
+          created_at: string
+          currency: string
+          customer_cpf: string | null
+          customer_email: string
+          customer_name: string
+          customer_phone: string
+          discount_cents: number
+          id: string
+          order_number: string
+          payment_method: string
+          payment_status: string
+          price_mode: string
+          provider: string
+          provider_amount_cents: number | null
+          provider_charge_id: string | null
+          provider_order_id: string | null
+          provider_transaction_id: string | null
+          public_status_token: string
+          qr_code_expires_at: string | null
+          qr_code_text: string | null
+          shipping_cents: number | null
+          shipping_note: string
+          status: string
+          subtotal_cents: number
+          total_cents: number
+          updated_at: string
+        }
+        Insert: {
+          address_cep: string
+          address_city: string
+          address_complement?: string | null
+          address_country?: string
+          address_neighborhood: string
+          address_number: string
+          address_state: string
+          address_street: string
+          address_verified_at: string
+          approved_at?: string | null
+          created_at?: string
+          currency?: string
+          customer_cpf?: string | null
+          customer_email: string
+          customer_name: string
+          customer_phone: string
+          discount_cents?: number
+          id?: string
+          order_number?: string
+          payment_method?: string
+          payment_status?: string
+          price_mode: string
+          provider?: string
+          provider_amount_cents?: number | null
+          provider_charge_id?: string | null
+          provider_order_id?: string | null
+          provider_transaction_id?: string | null
+          public_status_token?: string
+          qr_code_expires_at?: string | null
+          qr_code_text?: string | null
+          shipping_cents?: number | null
+          shipping_note?: string
+          status?: string
+          subtotal_cents: number
+          total_cents: number
+          updated_at?: string
+        }
+        Update: {
+          address_cep?: string
+          address_city?: string
+          address_complement?: string | null
+          address_country?: string
+          address_neighborhood?: string
+          address_number?: string
+          address_state?: string
+          address_street?: string
+          address_verified_at?: string
+          approved_at?: string | null
+          created_at?: string
+          currency?: string
+          customer_cpf?: string | null
+          customer_email?: string
+          customer_name?: string
+          customer_phone?: string
+          discount_cents?: number
+          id?: string
+          order_number?: string
+          payment_method?: string
+          payment_status?: string
+          price_mode?: string
+          provider?: string
+          provider_amount_cents?: number | null
+          provider_charge_id?: string | null
+          provider_order_id?: string | null
+          provider_transaction_id?: string | null
+          public_status_token?: string
+          qr_code_expires_at?: string | null
+          qr_code_text?: string | null
+          shipping_cents?: number | null
+          shipping_note?: string
+          status?: string
+          subtotal_cents?: number
+          total_cents?: number
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      payment_events: {
+        Row: {
+          amount_cents: number | null
+          authenticity_verified: boolean
+          created_at: string
+          event_key: string
+          event_status: string | null
+          id: string
+          order_id: string | null
+          payload: Json
+          processed_at: string | null
+          processing_error: string | null
+          provider: string
+          provider_charge_id: string | null
+          provider_order_id: string | null
+          updated_at: string
+        }
+        Insert: {
+          amount_cents?: number | null
+          authenticity_verified?: boolean
+          created_at?: string
+          event_key: string
+          event_status?: string | null
+          id?: string
+          order_id?: string | null
+          payload: Json
+          processed_at?: string | null
+          processing_error?: string | null
+          provider?: string
+          provider_charge_id?: string | null
+          provider_order_id?: string | null
+          updated_at?: string
+        }
+        Update: {
+          amount_cents?: number | null
+          authenticity_verified?: boolean
+          created_at?: string
+          event_key?: string
+          event_status?: string | null
+          id?: string
+          order_id?: string | null
+          payload?: Json
+          processed_at?: string | null
+          processing_error?: string | null
+          provider?: string
+          provider_charge_id?: string | null
+          provider_order_id?: string | null
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "payment_events_order_id_fkey"
+            columns: ["order_id"]
+            isOneToOne: false
+            referencedRelation: "orders"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      product_inventory: {
+        Row: {
+          available: boolean
+          product_id: string
+          stock_quantity: number | null
+          updated_at: string
+        }
+        Insert: {
+          available?: boolean
+          product_id: string
+          stock_quantity?: number | null
+          updated_at?: string
+        }
+        Update: {
+          available?: boolean
+          product_id?: string
+          stock_quantity?: number | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      apply_pagbank_payment: {
+        Args: {
+          p_amount_cents: number
+          p_event_key: string
+          p_order_id: string
+          p_payload: Json
+          p_provider_charge_id: string
+          p_provider_order_id: string
+          p_provider_transaction_id: string
+          p_status: string
+        }
+        Returns: {
+          became_paid: boolean
+          order_id: string
+          order_number: string
+        }[]
+      }
     }
     Enums: {
       [_ in never]: never
