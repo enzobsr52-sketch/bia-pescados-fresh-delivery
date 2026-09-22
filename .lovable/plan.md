@@ -12,7 +12,7 @@ Substituir o Pix estático e os pedidos salvos no aparelho por um fluxo seguro e
 - Não existe webhook de pagamento, validação de assinatura, idempotência, estoque numérico ou fila de notificações.
 - Os preços, descontos e totais atuais são calculados somente no navegador.
 - O WhatsApp atual usa apenas links manuais; a conta oficial ainda não foi vinculada.
-- A TAG foi informada como pertencente ao PagBank/PagSeguro, mas sua função exata ainda precisa ser confirmada na documentação oficial antes de ser ligada a qualquer campo.
+- A documentação oficial atual e legada do PagBank/PagSeguro não possui um campo chamado TAG e o valor fornecido não corresponde aos formatos documentados de token, pedido, cobrança, checkout, `senderHash`, assinatura ou chave de idempotência. Ele não será usado como credencial nem encaixado em um campo diferente.
 
 ## Implementação
 
@@ -40,7 +40,7 @@ Substituir o Pix estático e os pedidos salvos no aparelho por um fluxo seguro e
 ### 4. PagBank/PagSeguro
 
 - Criar a cobrança somente pelo servidor usando a API oficial documentada.
-- Aplicar a TAG exatamente no campo oficial confirmado pelo PagBank/PagSeguro; se a documentação não reconhecer esse formato, interromper essa parte e informar o dado correto necessário.
+- Integrar a API oficial de Pedidos do PagBank/PagSeguro com token Bearer do estabelecimento, chave de idempotência por pedido e URL de notificação. A TAG fornecida ficará fora das chamadas porque não existe campo oficial correspondente; será necessário obter do emissor o nome exato da tela/campo ou uma documentação do plugin que a gerou.
 - Receber o webhook em endereço público fixo, validar sua autenticidade e consultar a transação no provedor quando necessário.
 - Aprovar o pedido somente após confirmação oficial e comparar o valor confirmado com o total persistido.
 - Tratar eventos repetidos sem duplicar pedido, pagamento ou efeitos.
@@ -71,7 +71,7 @@ Substituir o Pix estático e os pedidos salvos no aparelho por um fluxo seguro e
 ## Configurações externas necessárias
 
 - **PagBank/PagSeguro:** credencial oficial da API e segredo/configuração de webhook, obtidos no painel de desenvolvedores PagBank. Serão armazenados como segredos do servidor; nenhum valor irá para o navegador.
-- **TAG PagBank/PagSeguro:** confirmação do nome do campo/tela de origem. O valor será preservado exatamente, mas não será encaixado em um campo não documentado.
+- **TAG atribuída ao PagBank/PagSeguro:** enviar o nome exato da tela/campo ou a documentação do plugin que exibiu esse valor. O PagBank não documenta uma TAG com esse formato; ela não pode substituir `PAGBANK_API_TOKEN`, chave pública, assinatura de webhook ou chave de idempotência.
 - **WhatsApp Business:** vincular a conta Business do número exibido no site pelo cartão oficial de conexão. A tentativa foi recusada, portanto o envio automático continua bloqueado.
 - **Modelo WhatsApp:** aprovação pela Meta quando a regra da conta exigir mensagem modelo para iniciar a conversa.
 
