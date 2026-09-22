@@ -77,7 +77,7 @@ function Home() {
         <div className="relative mx-auto max-w-7xl px-4 py-14 sm:py-20 md:py-24">
           <div className="max-w-xl min-w-0">
             <span className="text-xs font-bold uppercase text-grape-foreground/90">
-              Peixes, frutos do mar e produtos congelados
+              PEIXES • FRUTOS DO MAR • EMPANADOS • CULINÁRIA ORIENTAL
             </span>
             <h1 className="mt-4 font-display text-[2.25rem] leading-[1.02] sm:text-5xl md:text-6xl">
               Sabor e qualidade<br className="hidden sm:block" /> em cada refeição.
