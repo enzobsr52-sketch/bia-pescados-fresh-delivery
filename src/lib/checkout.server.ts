@@ -47,7 +47,7 @@ export function priceCheckout(input: CheckoutInput) {
     return { productId: product.id, name: product.name, weight: product.weight, quantity, unitPriceCents, subtotalCents: unitPriceCents * quantity };
   });
   const subtotalCents = items.reduce((sum, item) => sum + item.subtotalCents, 0);
-  const discountCents = input.priceMode === "varejo" ? Math.round(subtotalCents * 0.05) : 0;
+  const discountCents = 0;
   const totalCents = subtotalCents - discountCents;
   if (totalCents <= 0) throw new Error("Total do pedido inválido.");
   return { items, subtotalCents, discountCents, totalCents };
