@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { verifyWebhookRequest } from "@lovable.dev/webhooks-js";
+import type { Json } from "@/integrations/supabase/types";
 
 type WhatsAppPayload = {
   entry?: Array<{ changes?: Array<{ value?: { statuses?: Array<{ id?: string; status?: string; recipient_id?: string; timestamp?: string; errors?: unknown[] }> } }> }>;
@@ -23,14 +24,16 @@ export const Route = createFileRoute("/api/public/whatsapp/webhook")({
           return new Response("Invalid signature", { status: 401 });
         }
         const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
-        const { data: stored, error: storeError } = await supabaseAdmin.from("whatsapp_webhook_events").upsert({ delivery_id: deliveryId, event, payload }, { onConflict: "delivery_id", ignoreDuplicates: true }).select("processed_at").maybeSingle();
+        const storedPayload = JSON.parse(JSON.stringify(payload)) as Json;
+        const { data: stored, error: storeError } = await supabaseAdmin.from("whatsapp_webhook_events").upsert({ delivery_id: deliveryId, event, payload: storedPayload }, { onConflict: "delivery_id", ignoreDuplicates: true }).select("processed_at").maybeSingle();
         if (storeError) return new Response("Storage failed", { status: 500 });
         if (stored?.processed_at) return new Response("ok");
         try {
           const statuses = payload.entry?.flatMap((entry) => entry.changes ?? []).flatMap((change) => change.value?.statuses ?? []) ?? [];
           for (const status of statuses) {
             if (!status.id || !status.status || !allowedStatuses.has(status.status)) continue;
-            await supabaseAdmin.from("whatsapp_message_statuses").upsert({ delivery_id: deliveryId, provider_message_id: status.id, status: status.status, recipient_id: status.recipient_id ?? null, provider_timestamp: status.timestamp ? new Date(Number(status.timestamp) * 1000).toISOString() : null, errors: status.errors ?? null }, { onConflict: "delivery_id,provider_message_id,status", ignoreDuplicates: true });
+            const errors = status.errors ? JSON.parse(JSON.stringify(status.errors)) as Json : null;
+            await supabaseAdmin.from("whatsapp_message_statuses").upsert({ delivery_id: deliveryId, provider_message_id: status.id, status: status.status, recipient_id: status.recipient_id ?? null, provider_timestamp: status.timestamp ? new Date(Number(status.timestamp) * 1000).toISOString() : null, errors }, { onConflict: "delivery_id,provider_message_id,status", ignoreDuplicates: true });
             const notificationStatus = status.status === "failed" ? "FAILED" : status.status === "sent" || status.status === "delivered" || status.status === "read" ? "SENT" : undefined;
             if (notificationStatus) await supabaseAdmin.from("notification_outbox").update({ status: notificationStatus, last_error: status.status === "failed" ? JSON.stringify(status.errors ?? []) : null }).eq("provider_message_id", status.id);
           }

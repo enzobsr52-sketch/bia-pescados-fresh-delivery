@@ -34,6 +34,7 @@ export const Route = createFileRoute("/api/public/webhooks/pagbank")({
           return new Response("Invalid payload", { status: 400 });
         }
         const charge = payload.charges[0];
+        if (!charge) return new Response("Invalid payload", { status: 400 });
         const mappedStatus = statusMap[charge.status];
         if (!mappedStatus) return new Response("ok");
         const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
@@ -43,7 +44,7 @@ export const Route = createFileRoute("/api/public/webhooks/pagbank")({
           p_order_id: payload.reference_id,
           p_provider_order_id: payload.id,
           p_provider_charge_id: charge.id,
-          p_provider_transaction_id: charge.payment_response?.reference ?? null,
+          p_provider_transaction_id: charge.payment_response?.reference ?? "",
           p_status: mappedStatus,
           p_amount_cents: charge.amount.value,
           p_payload: payload,
