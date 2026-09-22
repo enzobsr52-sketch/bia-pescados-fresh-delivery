@@ -8,6 +8,7 @@
 - [ ] Confirmar pagamento somente por webhook oficial autenticado.
 - [ ] Notificar automaticamente a proprietária no WhatsApp com retry seguro.
 - [ ] Confirmar no WhatsApp do número do site cada pedido aprovado, sem depender de ação manual.
+- [ ] Vincular a conta WhatsApp Business da proprietária e selecionar este projeto para receber as confirmações de entrega.
 - [ ] Atualizar o checkout preservando o visual e os recursos existentes.
 - [ ] Trocar a frase da imagem para “PEIXES • FRUTOS DO MAR • EMPANADOS • CULINÁRIA ORIENTAL”.
 - [ ] Executar os 13 testes obrigatórios e revisar segurança final.
