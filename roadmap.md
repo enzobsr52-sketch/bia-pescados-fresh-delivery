@@ -8,7 +8,7 @@
 - [ ] Confirmar pagamento somente por webhook oficial autenticado.
 - [ ] Notificar automaticamente a proprietária no WhatsApp com retry seguro.
 - [ ] Confirmar no WhatsApp do número do site cada pedido aprovado, sem depender de ação manual.
-- [ ] Vincular exclusivamente a conta WhatsApp Business da Pescados da Bia, correspondente ao número exibido no site, e selecionar este projeto para receber confirmações.
+- [ ] Substituir a notificação WhatsApp por e-mail automático via Gmail da Pescados da Bia; a proprietária deve autorizar a conta correta, não o Gmail pessoal da criadora do site.
 - [ ] Atualizar o checkout preservando o visual e os recursos existentes.
 - [ ] Trocar a frase da imagem para “PEIXES • FRUTOS DO MAR • EMPANADOS • CULINÁRIA ORIENTAL”.
 - [ ] Executar os 13 testes obrigatórios e revisar segurança final.
