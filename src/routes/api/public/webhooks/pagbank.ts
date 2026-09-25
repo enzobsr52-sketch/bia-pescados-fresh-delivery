@@ -14,6 +14,8 @@ const webhookSchema = z.object({
 });
 
 const statusMap: Record<string, string> = {
+  WAITING: "WAITING",
+  IN_ANALYSIS: "IN_ANALYSIS",
   PAID: "PAID",
   DECLINED: "DECLINED",
   CANCELED: "CANCELED",
@@ -44,12 +46,15 @@ export const Route = createFileRoute("/api/public/webhooks/pagbank")({
           p_order_id: payload.reference_id,
           p_provider_order_id: payload.id,
           p_provider_charge_id: charge.id,
-          p_provider_transaction_id: charge.payment_response?.reference ?? "",
+          p_provider_transaction_id: charge.payment_response?.reference?.trim() || "",
           p_status: mappedStatus,
           p_amount_cents: charge.amount.value,
           p_payload: payload,
         });
-        if (error) return new Response("Processing failed", { status: 500 });
+        if (error) {
+          console.error("PagBank webhook processing failed", { code: error.code, message: error.message, orderId: payload.reference_id, status: mappedStatus });
+          return new Response("Processing failed", { status: 500 });
+        }
         if (mappedStatus === "PAID") {
           const { processOrderNotification, retryPendingNotifications } = await import("@/lib/order-notifications.server");
           await processOrderNotification(supabaseAdmin, payload.reference_id).catch(() => undefined);

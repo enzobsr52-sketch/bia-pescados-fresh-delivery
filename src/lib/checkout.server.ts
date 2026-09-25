@@ -67,10 +67,13 @@ export async function createPagBankPix(params: {
 }) {
   const token = process.env["PAGBANK_API_TOKEN"];
   if (!token) throw new Error("PAGBANK_NOT_CONFIGURED");
+  const phone = params.customer.phone.replace(/\D/g, "");
+  const area = phone.slice(0, 2);
+  const number = phone.slice(2);
   const expirationDate = new Date(Date.now() + 30 * 60 * 1000).toISOString();
   const body = {
     reference_id: params.orderId,
-    customer: { name: params.customer.name, email: params.customer.email, tax_id: params.customer.cpf.replace(/\D/g, "") || undefined, phones: [{ country: "55", area: params.customer.phone.replace(/\D/g, "").slice(-11, -9), number: params.customer.phone.replace(/\D/g, "").slice(-9), type: "MOBILE" }] },
+    customer: { name: params.customer.name, email: params.customer.email, tax_id: params.customer.cpf.replace(/\D/g, ""), phones: [{ country: "55", area, number, type: "MOBILE" }] },
     items: params.items.map((item) => ({ reference_id: item.productId, name: `${item.name} ${item.weight}`, quantity: item.quantity, unit_amount: item.unitPriceCents })),
     qr_codes: [{ amount: { value: params.totalCents }, expiration_date: expirationDate }],
     notification_urls: [params.notificationUrl],
@@ -81,7 +84,10 @@ export async function createPagBankPix(params: {
     body: JSON.stringify(body),
   });
   const text = await response.text();
-  if (!response.ok) throw new Error(`PAGBANK_CREATE_FAILED:${response.status}:${text.slice(0, 500)}`);
+  if (!response.ok) {
+    console.error("PagBank order creation failed", { status: response.status, response: text.slice(0, 1000), orderId: params.orderId });
+    throw new Error(`PAGBANK_CREATE_FAILED:${response.status}`);
+  }
   const result = JSON.parse(text) as { id?: string; qr_codes?: Array<{ text?: string; expiration_date?: string }> };
   const qr = result.qr_codes?.[0];
   if (!result.id || !qr?.text) throw new Error("PAGBANK_INVALID_RESPONSE");
