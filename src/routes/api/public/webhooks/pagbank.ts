@@ -46,7 +46,7 @@ export const Route = createFileRoute("/api/public/webhooks/pagbank")({
           p_order_id: payload.reference_id,
           p_provider_order_id: payload.id,
           p_provider_charge_id: charge.id,
-          p_provider_transaction_id: charge.payment_response?.reference?.trim() || null,
+          p_provider_transaction_id: charge.payment_response?.reference?.trim() || "",
           p_status: mappedStatus,
           p_amount_cents: charge.amount.value,
           p_payload: payload,
