@@ -1,6 +1,8 @@
 # Tarefas
 
 - [x] Auditar checkout, carrinho, preços, pagamentos, webhooks, banco, estoque, integrações e variáveis.
+- [x] Identificar a falha atual: credencial PagBank ausente; confirmar no teste real que nenhuma cobrança é criada.
+- [x] Corrigir conflito de identificador vazio que impediria o segundo Pix aprovado e reforçar validação de CPF/telefone.
 - [ ] Identificar e integrar corretamente a TAG fornecida ao provedor real.
 - [ ] Persistir pedidos e pagamentos com segurança e idempotência.
 - [ ] Validar endereço exclusivamente em Unaí/MG no servidor antes do pagamento.

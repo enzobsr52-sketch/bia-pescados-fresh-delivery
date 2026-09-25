@@ -1,9 +1,10 @@
-import { createServerFn } from "@tanstack/react-start";
+import { createServerFn, getRequest } from "@tanstack/react-start";
 import { checkoutInputSchema, statusInputSchema } from "./checkout.shared";
 
 export const createCheckout = createServerFn({ method: "POST" })
   .inputValidator(checkoutInputSchema)
   .handler(async ({ data }) => {
+    if (!process.env["PAGBANK_API_TOKEN"]) throw new Error("PAGBANK_NOT_CONFIGURED");
     const { verifyCep, priceCheckout, createPagBankPix, newOrderId } = await import("./checkout.server");
     const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
     const address = await verifyCep(data.address);
@@ -43,15 +44,18 @@ export const createCheckout = createServerFn({ method: "POST" })
       await supabaseAdmin.from("orders").delete().eq("id", order.id);
       throw new Error("Não foi possível registrar os produtos do pedido.");
     }
-    const appOrigin = process.env["APP_ORIGIN"];
-    if (!appOrigin) throw new Error("APP_ORIGIN_NOT_CONFIGURED");
+    const configuredOrigin = process.env["APP_ORIGIN"];
+    const requestOrigin = new URL(getRequest().url).origin;
+    const appOrigin = configuredOrigin || requestOrigin;
     try {
       const payment = await createPagBankPix({ orderId: order.id, orderNumber: order.order_number, customer: data.customer, items: priced.items, totalCents: priced.totalCents, notificationUrl: `${appOrigin.replace(/\/$/, "")}/api/public/webhooks/pagbank` });
       const { error: updateError } = await supabaseAdmin.from("orders").update({ provider_order_id: payment.providerOrderId, qr_code_text: payment.qrCodeText, qr_code_expires_at: payment.expiresAt }).eq("id", order.id);
       if (updateError) throw updateError;
       return { orderId: order.id, orderNumber: order.order_number, statusToken: order.public_status_token, paymentStatus: "WAITING", qrCodeText: payment.qrCodeText, expiresAt: payment.expiresAt, subtotalCents: priced.subtotalCents, discountCents: priced.discountCents, totalCents: priced.totalCents };
     } catch (error) {
-      await supabaseAdmin.from("orders").update({ status: "CANCELED", payment_status: "CANCELED" }).eq("id", order.id);
+      console.error("Checkout payment creation failed", { orderId: order.id, error: error instanceof Error ? error.message : "Unknown error" });
+      await supabaseAdmin.from("orders").update({ status: "CANCELED", payment_status: "CANCELED" }).eq("id", order.id).is("provider_order_id", null);
+      if (error instanceof Error && error.message.startsWith("PAGBANK_CREATE_FAILED:")) throw new Error("PAYMENT_PROVIDER_UNAVAILABLE");
       throw error;
     }
   });

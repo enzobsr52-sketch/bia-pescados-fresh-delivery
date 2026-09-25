@@ -1,14 +1,25 @@
 import { z } from "zod";
 
 export const deliveryBlockedMessage =
-  "🚚 No momento, realizamos entregas somente em Unaí - MG. Verifique seu endereço e tente novamente.";
+  "🚚 No momento, realizamos entregas somente em Unaí - MG.";
+
+function isValidCpf(value: string) {
+  const cpf = value.replace(/\D/g, "");
+  if (cpf.length !== 11 || /^(\d)\1{10}$/.test(cpf)) return false;
+  const digit = (length: number) => {
+    const sum = cpf.slice(0, length).split("").reduce((total, number, index) => total + Number(number) * (length + 1 - index), 0);
+    const remainder = (sum * 10) % 11;
+    return remainder === 10 ? 0 : remainder;
+  };
+  return digit(9) === Number(cpf[9]) && digit(10) === Number(cpf[10]);
+}
 
 export const checkoutInputSchema = z.object({
   customer: z.object({
     name: z.string().trim().min(3).max(120),
     email: z.email().max(180),
-    phone: z.string().trim().min(10).max(20),
-    cpf: z.string().trim().max(18).optional().default(""),
+    phone: z.string().trim().refine((value) => /^\d{10,11}$/.test(value.replace(/\D/g, "")), "Informe um telefone válido com DDD."),
+    cpf: z.string().trim().refine(isValidCpf, "Informe um CPF válido."),
   }),
   address: z.object({
     cep: z.string().trim().regex(/^\d{5}-?\d{3}$/),
