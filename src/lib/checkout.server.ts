@@ -36,7 +36,8 @@ export async function verifyCep(address: CheckoutInput["address"]) {
 }
 
 export function priceCheckout(input: CheckoutInput) {
-  if (input.priceMode === "atacado" && !input.wholesaleApproved) throw new Error("Acesso aos preços de revenda ainda não aprovado.");
+  // A aprovação guardada no navegador não é uma autorização de revenda confiável.
+  if (input.priceMode === "atacado") throw new Error("A compra com preços de revenda aguarda aprovação segura. Entre em contato com a loja.");
   const seen = new Set<string>();
   const items = input.items.map(({ id, quantity }) => {
     if (seen.has(id)) throw new Error("Produto repetido no carrinho.");
@@ -85,7 +86,7 @@ export async function createPagBankPix(params: {
   });
   const text = await response.text();
   if (!response.ok) {
-    console.error("PagBank order creation failed", { status: response.status, response: text.slice(0, 1000), orderId: params.orderId });
+    console.error("PagBank order creation failed", { status: response.status, orderId: params.orderId });
     throw new Error(`PAGBANK_CREATE_FAILED:${response.status}`);
   }
   const result = JSON.parse(text) as { id?: string; qr_codes?: Array<{ text?: string; expiration_date?: string }> };

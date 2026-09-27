@@ -57,8 +57,12 @@ export const Route = createFileRoute("/api/public/webhooks/pagbank")({
         }
         if (mappedStatus === "PAID") {
           const { processOrderNotification, retryPendingNotifications } = await import("@/lib/order-notifications.server");
-          await processOrderNotification(supabaseAdmin, payload.reference_id).catch(() => undefined);
-          await retryPendingNotifications(supabaseAdmin, 4);
+          await processOrderNotification(supabaseAdmin, payload.reference_id).catch((notificationError) => {
+            console.error("Approved order notification failed", { orderId: payload.reference_id, error: notificationError instanceof Error ? notificationError.message : "Unknown" });
+          });
+          await retryPendingNotifications(supabaseAdmin, 4).catch((retryError) => {
+            console.error("Notification retry failed", { error: retryError instanceof Error ? retryError.message : "Unknown" });
+          });
         }
         return new Response("ok");
       },

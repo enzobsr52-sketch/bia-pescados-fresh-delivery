@@ -19,6 +19,7 @@ const KEY = "pdb-cart-v1";
 
 export function CartProvider({ children }: { children: ReactNode }) {
   const [items, setItems] = useState<CartItem[]>([]);
+  const [hydrated, setHydrated] = useState(false);
   const { mode, wholesaleApproved } = usePriceMode();
   const priceOf = (p: Product) =>
     mode === "atacado" && wholesaleApproved ? p.priceWholesale : p.priceRetail;
@@ -26,12 +27,17 @@ export function CartProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     try {
       const raw = localStorage.getItem(KEY);
-      if (raw) setItems(JSON.parse(raw));
+      if (raw) {
+        const saved = JSON.parse(raw);
+        if (Array.isArray(saved)) setItems(saved);
+      }
     } catch {}
+    setHydrated(true);
   }, []);
   useEffect(() => {
+    if (!hydrated) return;
     try { localStorage.setItem(KEY, JSON.stringify(items)); } catch {}
-  }, [items]);
+  }, [items, hydrated]);
 
   const api = useMemo<CartCtx>(() => {
     const detailed = items
