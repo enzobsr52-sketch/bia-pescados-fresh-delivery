@@ -1,4 +1,5 @@
-import { createServerFn, getRequest } from "@tanstack/react-start";
+import { createServerFn } from "@tanstack/react-start";
+import { getRequest } from "@tanstack/react-start/server";
 import { checkoutInputSchema, statusInputSchema } from "./checkout.shared";
 
 export const createCheckout = createServerFn({ method: "POST" })
