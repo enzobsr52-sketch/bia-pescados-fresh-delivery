@@ -51,11 +51,13 @@ export const createCheckout = createServerFn({ method: "POST" })
     try {
       const payment = await createPagBankPix({ orderId: order.id, orderNumber: order.order_number, customer: data.customer, items: priced.items, totalCents: priced.totalCents, notificationUrl: `${appOrigin.replace(/\/$/, "")}/api/public/webhooks/pagbank` });
       const { error: updateError } = await supabaseAdmin.from("orders").update({ provider_order_id: payment.providerOrderId, qr_code_text: payment.qrCodeText, qr_code_expires_at: payment.expiresAt }).eq("id", order.id);
-      if (updateError) throw updateError;
+      // A cobrança já existe no provedor; não cancelar nem pedir ao cliente para criar outra.
+      if (updateError) console.error("PagBank charge created but local order update failed", { orderId: order.id, providerOrderId: payment.providerOrderId, code: updateError.code });
       return { orderId: order.id, orderNumber: order.order_number, statusToken: order.public_status_token, paymentStatus: "WAITING", qrCodeText: payment.qrCodeText, expiresAt: payment.expiresAt, subtotalCents: priced.subtotalCents, discountCents: priced.discountCents, totalCents: priced.totalCents };
     } catch (error) {
       console.error("Checkout payment creation failed", { orderId: order.id, error: error instanceof Error ? error.message : "Unknown error" });
-      await supabaseAdmin.from("orders").update({ status: "CANCELED", payment_status: "CANCELED" }).eq("id", order.id).is("provider_order_id", null);
+      // Uma falha após enviar a requisição não prova que o provedor não criou a cobrança.
+      // O pedido fica pendente para reconciliar por reference_id no webhook oficial.
       if (error instanceof Error && error.message.startsWith("PAGBANK_CREATE_FAILED:")) throw new Error("PAYMENT_PROVIDER_UNAVAILABLE");
       throw error;
     }
