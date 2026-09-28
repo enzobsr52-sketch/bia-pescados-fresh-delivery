@@ -29,7 +29,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
       const raw = localStorage.getItem(KEY);
       if (raw) {
         const saved = JSON.parse(raw);
-        if (Array.isArray(saved)) setItems(saved);
+        if (Array.isArray(saved)) setItems(saved.filter((entry): entry is CartItem => typeof entry?.id === "string" && Number.isInteger(entry.qty) && entry.qty > 0));
       }
     } catch {}
     setHydrated(true);

@@ -90,8 +90,6 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:title", content: "Pescados da Bia — Peixes frescos e congelados com entrega" },
       { name: "twitter:description", content: "Compre pescados frescos, filés, frutos do mar e congelados direto da Pescados da Bia. Entrega rápida e qualidade garantida." },
-      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/a16dbc45-6662-460e-85bd-b82be6b80479/id-preview-93dd1857--10945e7e-e911-42f1-b275-42b502a65829.lovable.app-1783908074434.png" },
-      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/a16dbc45-6662-460e-85bd-b82be6b80479/id-preview-93dd1857--10945e7e-e911-42f1-b275-42b502a65829.lovable.app-1783908074434.png" },
     ],
     links: [
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
