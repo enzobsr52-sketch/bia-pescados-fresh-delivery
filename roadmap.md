@@ -15,4 +15,4 @@
 - [x] Preservar o visual e o Pix no checkout, sem exibir opções de cartão que não estejam operacionais.
 - [x] Conferir a frase inicial “PEIXES • FRUTOS DO MAR • EMPANADOS • CULINÁRIA ORIENTAL”.
 - [ ] Executar testes Pix aprovado, crédito, débito, recusa, webhook repetido, fechamento do navegador e notificação real após obter credenciais/conta.
-- [ ] Documentar configurações externas pendentes e limites de verificação.
+- [x] Auditar configurações externas: faltam PAGBANK_API_TOKEN para criar cobranças; ambiente PAGBANK_ENVIRONMENT (sandbox/live) e URL HTTPS pública correta para notificação precisam ser definidos; conta Gmail da proprietária não autorizada. APP_ORIGIN é opcional se a origem da requisição já for a URL pública correta. A TAG fornecida não é token da API documentada. Sem isso não houve pagamento ou notificação real, nem testes aprovados de crédito/débito/webhook.
