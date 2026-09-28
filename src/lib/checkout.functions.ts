@@ -5,11 +5,11 @@ import { checkoutInputSchema, statusInputSchema } from "./checkout.shared";
 export const createCheckout = createServerFn({ method: "POST" })
   .inputValidator(checkoutInputSchema)
   .handler(async ({ data }) => {
-    if (!process.env["PAGBANK_API_TOKEN"]) throw new Error("PAGBANK_NOT_CONFIGURED");
     const { verifyCep, priceCheckout, createPagBankPix, newOrderId } = await import("./checkout.server");
-    const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
     const address = await verifyCep(data.address);
     const priced = priceCheckout(data);
+    if (!process.env["PAGBANK_API_TOKEN"]) throw new Error("PAGBANK_NOT_CONFIGURED");
+    const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
     const inventoryIds = priced.items.map((item) => item.productId);
     const { data: inventory, error: inventoryError } = await supabaseAdmin.from("product_inventory").select("product_id,available,stock_quantity").in("product_id", inventoryIds);
     if (inventoryError) throw new Error("Não foi possível verificar a disponibilidade.");
