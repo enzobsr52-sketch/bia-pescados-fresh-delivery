@@ -20,7 +20,8 @@ export const Route = createFileRoute("/produto/$id")({
           { name: "description", content: loaderData.product.description.slice(0, 155) },
           { property: "og:title", content: loaderData.product.name },
           { property: "og:description", content: loaderData.product.description.slice(0, 155) },
-          { property: "og:image", content: loaderData.product.image },
+          { property: "og:type", content: "product" },
+          { name: "twitter:card", content: "summary" },
         ]
       : [],
   }),
@@ -91,7 +92,6 @@ function ProductPage() {
                   <span className="rounded-full bg-pink/10 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider text-pink">Atacado</span>
                 )}
               </div>
-              <p className="mt-1 text-xs text-muted-foreground">ou 3x de {formatBRL(eff.price / 3)} sem juros</p>
             </>
           )}
 
